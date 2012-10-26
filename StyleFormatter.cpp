@@ -6,22 +6,22 @@ StyleFormatter::StyleFormatter(){
 StyleFormatter::~StyleFormatter(){
 }
 
-OutputCitation StyleFormatter::format(){
-	return;
+OutputCitation * StyleFormatter::format(){
+	return nullptr; 
 }
 
-OutputCitation StyleFormatter::formatBook(){
-	return;
+OutputCitation * StyleFormatter::formatBook(){
+	return nullptr;
 }
 
-OutputCitation StyleFormatter::formatConference(){
-	return;
+OutputCitation * StyleFormatter::formatConference(){
+	return nullptr;
 }
 
-OutputCitation StyleFormatter::formatJournal(){
-	return;
+OutputCitation * StyleFormatter::formatJournal(){
+	return nullptr;
 }
 
-OutputCitation StyleFormatter::formatTechnicalReport(){
-	return;
+OutputCitation * StyleFormatter::formatTechnicalReport(){
+	return nullptr;
 }

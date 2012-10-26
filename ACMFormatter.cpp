@@ -6,22 +6,22 @@ ACMFormatter::ACMFormatter(void){
 ACMFormatter::~ACMFormatter(void){
 }
 
-OutputCitation ACMFormatter::format(){
+OutputCitation * ACMFormatter::format(){
 
 }
 
-OutputCitation ACMFormatter::formatBook(){
+OutputCitation * ACMFormatter::formatBook(){
 
 }
 
-OutputCitation ACMFormatter::formatConference(){
+OutputCitation * ACMFormatter::formatConference(){
 
 }
 
-OutputCitation ACMFormatter::formatJournal(){
+OutputCitation * ACMFormatter::formatJournal(){
 
 }
 
-OutputCitation ACMFormatter::formatTechnicalReport(){
+OutputCitation * ACMFormatter::formatTechnicalReport(){
 
 }

@@ -6,22 +6,22 @@ APAFormatter::APAFormatter(void){
 APAFormatter::~APAFormatter(void){
 }
 
-OutputCitation APAFormatter::format(){
+OutputCitation * APAFormatter::format(){
 
 }
 
-OutputCitation APAFormatter::formatBook(){
+OutputCitation * APAFormatter::formatBook(){
 
 }
 
-OutputCitation APAFormatter::formatConference(){
+OutputCitation * APAFormatter::formatConference(){
 
 }
 
-OutputCitation APAFormatter::formatJournal(){
+OutputCitation * APAFormatter::formatJournal(){
 
 }
 
-OutputCitation APAFormatter::formatTechnicalReport(){
+OutputCitation * APAFormatter::formatTechnicalReport(){
 
 }
