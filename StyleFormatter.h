@@ -24,6 +24,6 @@ public:
 	StyleFormatter(void);
 	~StyleFormatter(void);
 
-	virtual OutputCitation * format();
+	virtual OutputCitation * format(ResourceData data);
 };
 

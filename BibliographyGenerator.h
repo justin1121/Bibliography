@@ -11,15 +11,21 @@
 #pragma once
 #include "CitationList.h"
 #include "StyleFormatter.h"
+#include "IEEEFormatter.h"
+#include "APAFormatter.h"
+#include "ACMFormatter.h"
 #include "OutputCitation.h"
 #include "ResourceData.h"
+#include "BookData.h"
+#include <iostream>
+#include <cstdlib>
 using namespace std;
 
 class BibliographyGenerator{
 	CitationList 	citeList;
 	StyleFormatter 	* formatter;
 	//OutputCitation 	*citation;
-	list 			outputlist;
+	//list 			outputlist;
 	
 public:
 	BibliographyGenerator(CitationList list, int style);

@@ -11,6 +11,14 @@
 #include "BibliographyGenerator.h"
 
 BibliographyGenerator::BibliographyGenerator(CitationList list, int style){
+	BookData testData;
+	testData.setData(0,"Key  =  Hastie-2001 ; \
+		Author = Trevor Hastie, Robert Tibshirani, and Jerome H. Friedman ;\
+		Date =  2001 ;\
+		Title  = The elements of statistical learning: data mining, inference, and prediction ;\
+		Place =  New York, NY ;\
+		Publisher  =  Springer-Verlag ;");
+	
 	citeList = list;
 	
 	//set the style formatter to the selected type
@@ -32,7 +40,7 @@ BibliographyGenerator::BibliographyGenerator(CitationList list, int style){
 			exit(1);
 	}
 	
-	outputlist = new list<string>();
+	//outputlist = new list<string>();
 }
 
 BibliographyGenerator::~BibliographyGenerator(void){
@@ -42,17 +50,13 @@ BibliographyGenerator::~BibliographyGenerator(void){
 
 //This function takes in each item in the citation list 
 //and sends it to the formatter to be output in the correct style
-void BibliograpyGenerator::generate(void){
-	string referenceUnit = "";
+void BibliographyGenerator::generate(void){
 	
-	while(!testList.empty()){
-		tempString = testList.front();
-		tempList.pop_front();
-		
-		formatter.format(tempString);
+	while(!citeList.empty()){		
+		formatter->format(citeList.nextCitation());
 	}
 }
 
-void BibliograpyGenerator::printCitations(void){
+void BibliographyGenerator::printCitations(void){
 
 }

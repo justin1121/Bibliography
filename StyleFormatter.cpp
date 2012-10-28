@@ -15,7 +15,7 @@ StyleFormatter::StyleFormatter(){
 StyleFormatter::~StyleFormatter(){
 }
 
-OutputCitation * StyleFormatter::format(){
+OutputCitation * StyleFormatter::format(ResourceData data){
 	return 0; 
 }
 

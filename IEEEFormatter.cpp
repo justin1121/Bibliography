@@ -20,7 +20,7 @@ IEEEFormatter::~IEEEFormatter(void){
 //the format function needs to take in a resource data type
 //or in this case a string (testing) and create a new string with
 //the chosen format
-OutputCitation * IEEEFormatter::format(string reference){
+OutputCitation * IEEEFormatter::format(ResourceData data){
 	
 }
 
