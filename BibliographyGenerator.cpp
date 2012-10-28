@@ -10,14 +10,8 @@
 
 #include "BibliographyGenerator.h"
 
-BibliographyGenerator::BibliographyGenerator(int style){
-	string testString1 ("Trevor Hastie, Robert Tibshirani, and Jerome H. Friedman");
-	string testString2 ("2001 ");
-	string testString3 ("The elements of statistical learning: data mining, inference, and prediction");
-	testList = new list<string>();
-	testList.push_back(testString1);
-	testList.push_back(testString2);
-	testList.push_back(testString3);
+BibliographyGenerator::BibliographyGenerator(CitationList list, int style){
+	citeList = list;
 	
 	//set the style formatter to the selected type
 	switch (style){
@@ -42,9 +36,7 @@ BibliographyGenerator::BibliographyGenerator(int style){
 }
 
 BibliographyGenerator::~BibliographyGenerator(void){
-	delete testList;
 	delete formatter;
-	delete outputlist;
 	cout << "\ndead\n";
 }
 

@@ -9,20 +9,20 @@
  */
 
 #pragma once
-//#include "CitationList.h"
+#include "CitationList.h"
 #include "StyleFormatter.h"
 #include "OutputCitation.h"
+#include "ResourceData.h"
 using namespace std;
 
 class BibliographyGenerator{
-	//CitationList list;
-	list 			testList;
-	StyleFormatter 	formatter;
+	CitationList 	citeList;
+	StyleFormatter 	* formatter;
 	//OutputCitation 	*citation;
 	list 			outputlist;
 	
 public:
-	BibliographyGenerator(int style);
+	BibliographyGenerator(CitationList list, int style);
 	~BibliographyGenerator(void);
 	void generate(void);
 	void printCitations(void);
