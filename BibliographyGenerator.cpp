@@ -48,11 +48,16 @@ BibliographyGenerator::~BibliographyGenerator(void){
 	cout << "\ndead\n";
 }
 
+//This function takes in each item in the citation list 
+//and sends it to the formatter to be output in the correct style
 void BibliograpyGenerator::generate(void){
-	string = "";
+	string referenceUnit = "";
 	
 	while(!testList.empty()){
+		tempString = testList.front();
+		tempList.pop_front();
 		
+		formatter.format(tempString);
 	}
 }
 
