@@ -14,6 +14,7 @@ public:
 	CitationList(void);
 	~CitationList(void);
 	void addCitation(ResourceData);
+	bool empty(void);
 	ResourceData nextCitation(void);
 };
 

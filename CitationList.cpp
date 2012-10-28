@@ -16,3 +16,7 @@ ResourceData CitationList::nextCitation(void){
 
    return temp;
 }
+
+bool CitationList::empty(void){
+	return dataList.empty();
+}
