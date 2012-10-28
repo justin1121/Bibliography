@@ -3,6 +3,7 @@
  *  BibProcessor
  *
  *  Created by Jocelyne Faddoul on 12-10-15.
+ *  Modified by Justin Patriquin 12-10-26.
  *  Copyright 2012 Dalhousie University. All rights reserved.
  *
  */
@@ -27,48 +28,66 @@ using namespace std;
  */
 BibliographyParser::BibliographyParser (const char* bibFleName ) {
   list = new CitationList[1];
-
-	mybibFileName = bibFleName;
-	bookToken= "@book{";
-	conferenceToken = "@conference{";
-	journalToken = "@journal{";
-	techReportToken = "@technicalreport{";
-	endOfItem = "}";
-	endOfFile = "};";
+BibliographyParser::BibliographyParser(const char* bibFleName, const char * inputFileName) {
+    list = new CitationList[1];
+	BibliographyParser::bibFileName   = bibFleName;
+	BibliographyParser::inputFileName = inputFileName;
+	bookToken                         = "@book{";
+	conferenceToken                   = "@conference{";
+	journalToken                      = "@journal{";
+	techReportToken                   = "@technicalreport{";
+	endOfItem                         = "}";
+	endOfFile                         = "};";
+	startOfInputToken                 = "/{";
 }
 
 /*
  * BibliographyParser destructor
  */
-BibliographyParser::~BibliographyParser(){
+BibliographyParser::~BibliographyParser(void){
 }
 
 /*
  * Open the bibliography file 
  * - initialize a file stream object, ifstream, to read from the bibliography.txt file
  */
-void BibliographyParser::openBibFile(){
-	myfile= new ifstream(mybibFileName);
-	if (myfile->is_open())
-	{
-		cout<< "bibliography file opened successfully \n";
-		
+void BibliographyParser::openFiles(void){
+	bibFile   = new ifstream(bibFileName);
+	inputFile = new ifstream(inputFileName);
+
+	if (bibFile->is_open()){
+		cout << "Bibliography file opened successfully!\n";
 	}
-	else cout << "Unable to open bibliography file \n";
-	
+	else{
+		cout << "Unable to open bibliography file!\n";
+	}
+	if(inputFile->is_open()){
+		cout << "Input file opened successfully!\n";
+	}
+	else{
+		cout << "Unable to open inputfile!\n"
+	}
 }
 
 /*
  * Close the bibliography file 
  * - close the file stream associated with biliography.txt file
  */
-void BibliographyParser:: closeBibFile(){
-	if (myfile->is_open())
-	{
-		myfile->close();
-		cout<< "bibliography file closed successfully \n";
-		
-	}else cout<< "Unable to close bibliography file \n";
+void BibliographyParser::closeFiles(void){
+	if (bibFile->is_open()){
+		bibFile->close();
+		cout << "bibliography file closed successfully \n";
+	}
+	else{ 
+		cout << "Unable to close bibliography file \n";
+	}
+	if(inputFile->is_open()){
+		inputFile->close();
+		cout << "Input file close successfully!\n";
+	}
+	else{
+		cout << "Unable to close input file!\n";
+	}
 }
 
 /*
@@ -79,9 +98,8 @@ void BibliographyParser:: closeBibFile(){
  * - 
  * - 
  */
-void BibliographyParser::parseBibliographyItems(){
-	
-	if (myfile->is_open())
+void BibliographyParser::parseBibliographyItems(void){
+	if (bibFile->is_open())
 	{
 		/* type of the collection holding the bibliography items' information
 		 * - a multimap of key,value pairs such that the key is used to identify the item's type
@@ -96,10 +114,10 @@ void BibliographyParser::parseBibliographyItems(){
 		int itemIdentifier = 0;
 		string itemString="";
 		
-		while(myfile->good())
+		while(bibFile->good())
 		{
 			string stringToken;
-			getline (*myfile,line);
+			getline (*bibFile,line);
 			
 			string itemStream;
 			
@@ -144,23 +162,33 @@ void BibliographyParser::parseBibliographyItems(){
  *- line by line, to the standard output
  *- requires an open file stream object, myfile
  */
-void BibliographyParser::printBibliography(){
+void BibliographyParser::printBibliography(void){
 	
-	if (myfile->is_open())
-	{
+	if (bibFile->is_open()){
 		string line;
-		while(myfile->good())
-		{
+		while(bibFile->good()){
 			string val;
 			// get file information line by line
-			getline (*myfile,line);
+			getline(*bibFile, line);
 			// display each line
-			cout <<line << endl;
-			
+			cout << line << endl;
 		}
-		
 	}
-	else cout << "bibliography file not opened \n";
-	
-	
+	else{
+		cout << "bibliography file not opened \n";
+	}
+}
+
+
+CitationList * BibliographyParser::getCitationList(void){
+	return list;
+}
+
+
+void BibliographyParser::addCitationList(ResourceData * data){
+	list->addCitation(data);
+}
+
+
+void BibliographyParser::parseInputFile(void){
 }

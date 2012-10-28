@@ -28,7 +28,6 @@ int main (int argc, char * const argv[]){
 	bParser.parseBibliographyItems();
 	bParser.closeBibFile();
 		
+	system("PAUSE");
 	return 0;
-	
-	
 }
