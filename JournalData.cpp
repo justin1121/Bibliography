@@ -1,6 +1,10 @@
 #include "JournalData.h"
 
 JournalData::JournalData(void){
+  journalToken = "Journal";
+  volumeToken  = "Volume";
+  numberToken  = "Number";
+  pagesToken   = "Pages";
 }
 
 JournalData::~JournalData(void){
@@ -29,4 +33,25 @@ void JournalData::setNumber(char * number){
 }
 void JournalData::setPages(char * pages){
 	JournalData::pages = pages;
+}
+
+void JournalData::setItem(char * data){
+  char * token;
+
+  strtok(data, "=");
+
+  while((token = strtok(NULL, "=")) != NULL){
+    if((strcmp(token, journalToken) == 0)){
+      setJournal(strtok(NULL, "="));
+    }
+    else if((strcmp(token, volumeToken) == 0)){
+      setVolume(strtok(NULL, "="));
+    }
+    else if((strcmp(token, numberToken) == 0)){
+      setNumber(strtok(NULL, "="));
+    }
+    else if((strcmp(token, pagesToken) == 0)){
+      setPages(strtok(NULL, "="));
+    }
+  }
 }

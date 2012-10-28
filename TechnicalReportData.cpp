@@ -1,6 +1,10 @@
 #include "TechnicalReportData.h"
 
 TechnicalReportData::TechnicalReportData(void){
+  organizationToken = "Organization";
+  numberToken       = "Number";
+  placeToken        = "Place";
+  publisherToken    = "Publisher";
 }
 
 TechnicalReportData::~TechnicalReportData(void){
@@ -29,4 +33,8 @@ void TechnicalReportData::setPlace(char * place){
 }
 void TechnicalReportData::setPublisher(char * publisher){
 	TechnicalReportData::publisher = publisher;
+}
+
+void TechnicalReportData::setItem(char * data){
+
 }

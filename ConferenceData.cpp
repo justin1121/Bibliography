@@ -1,6 +1,12 @@
 #include "ConferenceData.h"
 
 ConferenceData::ConferenceData(void){
+  proceedingsToken = "Proceedings";
+  placeToken       = "Place-of-Conference";
+  dateToken        = "Date-of-Conference";
+  cityToken        = "City";
+  publisherToken   = "Publisher";
+  pagesToken       = "Pages";
 }
 
 ConferenceData::~ConferenceData(void){
@@ -41,4 +47,31 @@ void ConferenceData::setPublisher(char * publisher){
 }
 void ConferenceData::setPages(char * pages){
 	ConferenceData::pages = pages;
+}
+
+void ConferenceData::setItem(char * data){
+  char * token;
+
+  strtok(data, "=");
+
+  while((token = strtok(NULL, "=")) != NULL){
+    if((strcmp(token, proceedingsToken) == 0)){
+      setProceedings(strtok(NULL, "="));
+    }
+    else if((strcmp(token, placeToken) == 0)){
+      setPlace(strtok(NULL, "="));
+    }
+    else if((strcmp(token, dateToken) == 0)){
+      setDate(strtok(NULL, "="));
+    }
+    else if((strcmp(token, cityToken) == 0)){
+      setCity(strtok(NULL, "="));
+    }
+    else if((strcmp(token, publisherToken) == 0)){
+      setPublisher(strtok(NULL, "="));
+    }
+    else if((strcmp(token, pagesToken) == 0)){
+      setPages(strtok(NULL, "="));
+    }
+  }
 }

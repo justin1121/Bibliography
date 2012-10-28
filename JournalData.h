@@ -1,5 +1,5 @@
 #pragma once
-#include "resourcedata.h"
+#include "ResourceData.h"
 
 class JournalData : public ResourceData{
 private:
@@ -7,6 +7,17 @@ private:
 	char * volume;
 	char * number;
 	char * pages;
+
+  const char * journalToken;
+  const char * volumeToken;
+  const char * numberToken;
+  const char * pagesToken;
+
+	void setJournal(char *);
+	void setNumber(char *);
+	void setPages(char *);
+	void setVolume(char *);
+  void setItem(char *);
 public:
 	JournalData(void);
 	~JournalData(void);
@@ -14,9 +25,5 @@ public:
 	char * getNumber(void);
 	char * getPages(void);
 	char * getVolume(void);
-	void setJournal(char *);
-	void setNumber(char *);
-	void setPages(char *);
-	void setVolume(char *);
 };
 

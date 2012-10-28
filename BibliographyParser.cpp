@@ -7,37 +7,40 @@
  *
  */
 
-#include "BibliographyParser.h"
-
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <map>
+
+#include "BibliographyParser.h"
+#include "BookData.h"
+#include "ConferenceData.h"
+#include "JournalData.h"
+#include "TechnicalReportData.h"
+
 using namespace std;
-
-
 
 /*
  * BibliographyParser constructor
  * - initializes the bibliography file name
  */
 BibliographyParser::BibliographyParser (const char* bibFleName ) {
+  list = new CitationList[1];
+
 	mybibFileName = bibFleName;
 	bookToken= "@book{";
 	conferenceToken = "@conference{";
 	journalToken = "@journal{";
 	techReportToken = "@technicalreport{";
-	enfOfItem = "}";
+	endOfItem = "}";
 	endOfFile = "};";
-	//cout<<"constructor of BibliographyParser called \n";
 }
 
 /*
  * BibliographyParser destructor
  */
 BibliographyParser::~BibliographyParser(){
-	//cout<<"destrcutror of BibliographyParser called \n";
 }
 
 /*
@@ -89,13 +92,9 @@ void BibliographyParser::parseBibliographyItems(){
 		 * - 4: technical report
 		 * - the value is a string representing information about the item.
 		 */
-		typedef multimap<int,string> IntStringMMap;
-		IntStringMMap bibCollection;  
-		
 		string line;
 		int itemIdentifier = 0;
 		string itemString="";
-		string endOfLineToken = "\n";
 		
 		while(myfile->good())
 		{
@@ -122,11 +121,10 @@ void BibliographyParser::parseBibliographyItems(){
 					/* "reading technical report information"*/
 					itemIdentifier = 4;
 					itemString = "";
-				}else if ((stringToken.compare(enfOfItem)==0) || (stringToken.compare(endOfFile)==0)){
+				}else if ((stringToken.compare(endOfItem)==0) || (stringToken.compare(endOfFile)==0)){
 					/* add the item to the collection */
 					itemString = itemString + "\n";
-					bibCollection.insert(make_pair(itemIdentifier,itemString));
-					
+
 					/*reset item's identifier and information string*/
 					itemIdentifier = 0;
 					itemString = "";
@@ -134,27 +132,11 @@ void BibliographyParser::parseBibliographyItems(){
 					itemString = itemString + " " + stringToken;
 				}
 			}
-			
-			
-			
-			
 		}
-		/* print all the items collected 
-		 * - iterate over all elements
-		 * - element member first is the key used to distinguish the type of the items (books, conference papers, etc...)
-		 * - element member second is the value which is a string holding the item's information
-		 */
-		IntStringMMap::iterator pos;
-		cout << "The items listed in the bibliography file consists of the following:\n" << endl;
-		
-		for (pos = bibCollection.begin(); pos != bibCollection.end(); ++pos) {
-			cout << "Item Type: "<< pos->first << endl;
-			cout << "Item Information:"<< pos->second << endl;
-		}
-		
-		cout << endl;
 	}
-	else cout << "bibliography file not opened \n";
+	else {
+    cout << "bibliography file not opened \n";
+  }
 }
 
 /*
