@@ -1,8 +1,9 @@
-#include "BibliographyParser.h"
 #include <iostream>
 // just included so will run on wins :)
 #include <sstream>
 #include <fstream>
+
+#include "BibliographyParser.h"
 
 using namespace std;
 
@@ -20,19 +21,12 @@ int main (int argc, char * const argv[]){
 	*/
 	getline(cin, iFileName);
 	const char* bFileName= iFileName.c_str();
-	//const char* bFileName = "/Users/Jocelyne/Desktop/bibliography.txt";
 	
 	BibliographyParser bParser(bFileName);
 		
-		//print bibliography
-		//bParser.openBibFile();
-		//bParser.printBibliography();
-		//bParser.closeBibFile();
-		
-		//parse bibliographyItems;
-		bParser.openBibFile();
-		bParser.parseBibliographyItems();
-		bParser.closeBibFile();
+	bParser.openBibFile();
+	bParser.parseBibliographyItems();
+	bParser.closeBibFile();
 		
 	return 0;
 	
