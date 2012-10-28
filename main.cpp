@@ -10,7 +10,7 @@ using namespace std;
 int main (int argc, char * const argv[]){
 	string iFileName;
 
-	cout << "please enter bib file name" << endl;
+	cout << "Please enter bib file name: " << endl;
 
 	// same with this just here to run on wins used to be:
 	// cin >> iFileName ... dunno why VS doesn't like it
@@ -21,12 +21,15 @@ int main (int argc, char * const argv[]){
 	*/
 	getline(cin, iFileName);
 	const char* bFileName= iFileName.c_str();
-	
-	BibliographyParser bParser(bFileName);
+
+	cout << "Please enter the text file name: " << endl;
+	getline(cin, iFileName);
+	const char * tFileName = iFileName.c_str();
+
+	BibliographyParser bParser(bFileName, tFileName);
 		
-	bParser.openBibFile();
+	bParser.openFiles();
 	bParser.parseBibliographyItems();
-	bParser.closeBibFile();
 		
 	system("PAUSE");
 	return 0;
