@@ -20,6 +20,6 @@ public:
 	IEEEFormatter(void);
 	~IEEEFormatter(void);
 
-	OutputCitation * format();
+	OutputCitation * format(ResourceData data);
 };
 
