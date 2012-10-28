@@ -1,5 +1,6 @@
 #pragma once
-#include "styleformatter.h"
+#include "StyleFormatter.h"
+
 class ACMFormatter : public StyleFormatter{
 private:
 	OutputCitation * formatBook();

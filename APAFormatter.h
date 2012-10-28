@@ -1,5 +1,6 @@
 #pragma once
 #include "StyleFormatter.h"
+
 class APAFormatter : public StyleFormatter{
 private:
 	OutputCitation * formatBook();
