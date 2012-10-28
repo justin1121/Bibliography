@@ -16,21 +16,21 @@ StyleFormatter::~StyleFormatter(){
 }
 
 OutputCitation * StyleFormatter::format(){
-	return nullptr; 
+	return 0; 
 }
 
 OutputCitation * StyleFormatter::formatBook(){
-	return nullptr;
+	return 0; 
 }
 
 OutputCitation * StyleFormatter::formatConference(){
-	return nullptr;
+	return 0;
 }
 
 OutputCitation * StyleFormatter::formatJournal(){
-	return nullptr;
+	return 0;
 }
 
 OutputCitation * StyleFormatter::formatTechnicalReport(){
-	return nullptr;
+	return 0;
 }
