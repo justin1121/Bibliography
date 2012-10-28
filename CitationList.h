@@ -1,15 +1,19 @@
 #pragma once
+#include <list>
+
 #include "ResourceData.h"
+
+using namespace std;
 
 static int count = 0;
 
 class CitationList{
 private:
-  ResourceData * data;
+	list<ResourceData> dataList;
 public:
 	CitationList(void);
 	~CitationList(void);
-	void addCitation(int, ResourceData);
+	void addCitation(ResourceData);
 	ResourceData nextCitation(void);
 };
 

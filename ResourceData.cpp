@@ -80,12 +80,12 @@ void ResourceData::setData(int type, char * data){
   strtok(data, ";"); 
 
   while((token = strtok(NULL, ";")) != NULL){
-    setBaseItem(token); 
+	setBaseItem(token); 
   }
 
   strtok(data, ";");
 
   while((token = strtok(NULL, ";")) != NULL){
-    setItem(token);
+	setItem(token);
   }
 }

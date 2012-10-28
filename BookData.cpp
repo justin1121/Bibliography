@@ -37,5 +37,4 @@ void BookData::setItem(char * data){
       setPublisher(strtok(NULL, "="));
     }
   }
-
 }

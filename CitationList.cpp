@@ -1,21 +1,18 @@
 #include "CitationList.h"
 
-CitationList::CitationList(int numEntries){
-  data = new ResourceData[numEntries]
+CitationList::CitationList(void){
 }
 
 CitationList::~CitationList(void){
 }
 
-void CitationList::addCitation(int i, ResourceData data){
-  data[i] = &data;
+void CitationList::addCitation(ResourceData data){
+	dataList.push_front(data);
 }
 
 ResourceData CitationList::nextCitation(void){
-   Resource d;
+   ResourceData temp = dataList.front();
+   dataList.pop_front();
 
-	 d = data[count];
-   index++;
-    
-   return d;
+   return temp;
 }

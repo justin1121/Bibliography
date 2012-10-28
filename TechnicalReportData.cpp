@@ -36,5 +36,22 @@ void TechnicalReportData::setPublisher(char * publisher){
 }
 
 void TechnicalReportData::setItem(char * data){
+  char * token;
 
+  strtok(data, "=");
+
+  while((token = strtok(NULL, "=")) != NULL){
+    if((strcmp(token, organizationToken) == 0)){
+      setOrganization(strtok(NULL, "="));
+    }
+    else if((strcmp(token, numberToken) == 0)){
+      setNumber(strtok(NULL, "="));
+    }
+    else if((strcmp(token, placeToken) == 0)){
+      setPlace(strtok(NULL, "="));
+    }
+    else if((strcmp(token, publisherToken) == 0)){
+      setPublisher(strtok(NULL, "="));
+    }
+  }
 }
