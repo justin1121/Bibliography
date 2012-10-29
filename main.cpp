@@ -9,6 +9,7 @@ using namespace std;
 
 int main (int argc, char * const argv[]){
 	string iFileName;
+	string pFileName;
 
 	cout << "Please enter bib file name: " << endl;
 
@@ -23,8 +24,8 @@ int main (int argc, char * const argv[]){
 	const char* bFileName= iFileName.c_str();
 
 	cout << "Please enter the text file name: " << endl;
-	getline(cin, iFileName);
-	const char * tFileName = iFileName.c_str();
+	getline(cin, pFileName);
+	const char * tFileName = pFileName.c_str();
 
 	BibliographyParser bParser(bFileName, tFileName);
 		
