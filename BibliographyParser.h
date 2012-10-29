@@ -12,9 +12,14 @@
 #define BIBLIOGRAPHYPARSER_HPP
 
 #include <iostream>
+#include <sstream>
 #include <fstream>
 
 #include "CitationList.h"
+#include "BookData.h"
+#include "ConferenceData.h"
+#include "JournalData.h"
+#include "TechnicalReportData.h"
 
 using namespace std;
 
@@ -34,11 +39,11 @@ private:
 	CitationList list;
 
 	void addCitationList(ResourceData);
-	void setBaseResourceData(stringstream, ResourceData);
-	void setBookData(stringstream, ResourceData);
-	void setJournalData(stringstream, ResourceData);
-	void setConferenceData(stringstream, ResourceData);
-	void setTechnicalReportData(stringstream, ResourceData);
+	void setBaseResourceData(ResourceData *, string, string);
+	void setBookData(BookData *, string, string);
+	void setJournalData(JournalData *, string, string);
+	void setConferenceData(ConferenceData *, string, string);
+	void setTechnicalReportData(TechnicalReportData *, string, string);
 public:
 	BibliographyParser(const char *, const char *); /*constructor*/
 	~BibliographyParser();						 /*destructor*/	

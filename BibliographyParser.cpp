@@ -8,11 +8,9 @@
  *
  */
 
-#include <fstream>
-#include <iostream>
 #include <string>
-#include <sstream>
 #include <map>
+#include <cstdlib>
 
 #include "BibliographyParser.h"
 #include "BookData.h"
@@ -109,58 +107,69 @@ void BibliographyParser::parseBibliographyItems(void){
 		 */
 		string line;
 		int itemIdentifier = 0;
-		string itemString="";
 
 		ResourceData * d;
 		while(bibFile->good())
 		{
-			string stringToken;
+			string idenToken, tempToken, valueString;
 			getline (*bibFile,line);
 			
-			string itemStream;
-			
 			stringstream sStream(line);
-			while (sStream >> stringToken){
-				cout << stringToken << "\n";
-				if (stringToken.compare(bookToken) == 0){
+			while (sStream >> idenToken){
+				if (idenToken.compare(bookToken) == 0){
 					/* "reading book information"*/
 					itemIdentifier = 1;
-					itemString = "";
 					d = new BookData();
-				}else if (stringToken.compare(conferenceToken) == 0){
+				}else if (idenToken.compare(conferenceToken) == 0){
 					/* "reading conference information"*/
 					itemIdentifier = 2;
-					itemString="";
 					d = new ConferenceData();
-				}else if (stringToken.compare(journalToken) == 0){
+				}else if (idenToken.compare(journalToken) == 0){
 					/* "reading journal information"*/
 					itemIdentifier = 3;
-					itemString = "";
 					d = new JournalData();
-				}else if (stringToken.compare(techReportToken)==0){
+				}else if (idenToken.compare(techReportToken)==0){
 					/* "reading technical report information"*/
 					itemIdentifier = 4;
-					itemString = "";
 					d = new TechnicalReportData();
-				}else if ((stringToken.compare(endOfItem)==0) || (stringToken.compare(endOfFile)==0)){
-					/* add the item to the collection */
-					itemString = itemString + "\n";
-					
+				}else if ((idenToken.compare(endOfItem)==0) || (idenToken.compare(endOfFile)==0)){
 					/* Set the data and add it to the citation list */
-					addCitationList(*d);
+          d->setType(itemIdentifier);
 
+        	addCitationList(*d);
+          delete d;
 					/*reset item's identifier and information string*/
 					itemIdentifier = 0;
-					itemString = "";
 				}else{
-					itemString = itemString + " " + stringToken;
 
+          sStream >> tempToken;
+          sStream >> tempToken;
+          while(tempToken.compare(";") != 0){
+            valueString = valueString + tempToken + " "; 
+            sStream >> tempToken;
+          }
+          setBaseResourceData(d, idenToken, valueString);
+          switch(itemIdentifier){
+            case 1:
+              setBookData((BookData *)d, idenToken, valueString);
+              break;
+            case 2:
+              setConferenceData((ConferenceData *)d, idenToken, valueString);
+              break;
+            case 3:
+              setJournalData((JournalData *)d, idenToken, valueString);
+              break;
+            case 4:
+              setTechnicalReportData((TechnicalReportData *)d, idenToken, valueString);
+              break;
+          }
+          sStream >> tempToken;
 				}
 			}
 		}
 	}
 	else {
-		cout << "bibliography file not opened \n";
+    cout << "bibliography file not opened \n";
 	}
 }
 
@@ -198,4 +207,82 @@ void BibliographyParser::addCitationList(ResourceData data){
 
 
 void BibliographyParser::parseInputFile(void){
+}
+
+void BibliographyParser::setBaseResourceData(ResourceData * data, string token, string valueToken){
+    if(token.compare(data->keyToken) == 0){
+        data->setKey(valueToken);
+    }  
+    else if(token.compare(data->authorToken) == 0){
+        data->setAuthor(valueToken);
+    }  
+    else if(token.compare(data->dateToken) == 0){
+        data->setDate(valueToken);
+    }  
+    else if(token.compare(data->titleToken) == 0){
+        data->setTitle(valueToken);
+    }  
+}
+
+void BibliographyParser::setBookData(BookData * data, string token, string valueToken){
+    if(token.compare(data->placeToken) == 0){
+        data->setPlace(valueToken);
+    }  
+    else if(token.compare(data->publisherToken) == 0){
+        data->setPublisher(valueToken);
+    }  
+
+}
+
+void BibliographyParser::setJournalData(JournalData * data, string token, string valueToken){
+    if(token.compare(data->journalToken) == 0){
+        data->setJournal(valueToken);
+    }  
+    else if(token.compare(data->volumeToken) == 0){
+        data->setVolume(valueToken);
+    }  
+    else if(token.compare(data->numberToken) == 0){
+        data->setNumber(valueToken);
+    }  
+    else if(token.compare(data->pagesToken) == 0){
+        data->setPages(valueToken);
+    }  
+}
+
+void BibliographyParser::setConferenceData(ConferenceData * data, string token, string valueToken){
+    if(token.compare(data->proceedingsToken) == 0){
+        data->setProceedings(valueToken);
+    }  
+    else if(token.compare(data->placeOfConferenceToken) == 0){
+        data->setPlaceOfConference(valueToken);
+    }  
+    else if(token.compare(data->dateOfConferenceToken) == 0){
+        data->setDateOfConference(valueToken);
+    }  
+    else if(token.compare(data->cityToken) == 0){
+        data->setCity(valueToken);
+    }  
+    else if(token.compare(data->publisherToken) == 0){
+        data->setPublisher(valueToken);
+    }  
+    else if(token.compare(data->pagesToken) == 0){
+        data->setPages(valueToken);
+    }   
+}
+
+void BibliographyParser::setTechnicalReportData(TechnicalReportData * data, 
+                                                string token, string valueToken){
+    if(token.compare(data->organizationToken) == 0){
+        data->setOrganization(valueToken);
+    }  
+    else if(token.compare(data->numberToken) == 0){
+        data->setNumber(valueToken);
+    }  
+    else if(token.compare(data->placeToken) == 0){
+        data->setPlace(valueToken);
+    }  
+    else if(token.compare(data->publisherToken) == 0){
+        data->setPublisher(valueToken);
+    }  
+
 }

@@ -32,20 +32,20 @@ public:
 	~ConferenceData(void);
 
 	const char * proceedingsToken;
-	const char * placeToken;
+	const char * placeOfConferenceToken;
 	const char * dateOfConferenceToken;
 	const char * cityToken;
 	const char * publisherToken;
 	const char * pagesToken;
 
 	string getProceedings();
-	string getPlace();
+	string getPlaceOfConference();
 	string getDateOfConference();
 	string getCity();
 	string getPublisher();
 	string getPages();
 	void setProceedings(string);
-	void setPlace(string);
+	void setPlaceOfConference(string);
 	void setDateOfConference(string);
 	void setCity(string);
 	void setPublisher(string);
