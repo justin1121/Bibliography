@@ -10,48 +10,27 @@ JournalData::JournalData(void){
 JournalData::~JournalData(void){
 }
 
-char * JournalData::getJournal(){
+string JournalData::getJournal(){
 	return journal;
 }
-char * JournalData::getVolume(){
+string JournalData::getVolume(){
 	return volume;
 }
-char * JournalData::getNumber(){
+string JournalData::getNumber(){
 	return number;
 }
-char * JournalData::getPages(){
+string JournalData::getPages(){
 	return pages;
 }
-void JournalData::setJournal(char * journal){
+void JournalData::setJournal(string journal){
 	JournalData::journal = journal;
 }
-void JournalData::setVolume(char * volume){
+void JournalData::setVolume(string volume){
 	JournalData::volume = volume;
 }
-void JournalData::setNumber(char * number){
+void JournalData::setNumber(string number){
 	JournalData::number = number;
 }
-void JournalData::setPages(char * pages){
+void JournalData::setPages(string pages){
 	JournalData::pages = pages;
-}
-
-void JournalData::setItem(char * data){
-  char * token;
-
-  strtok(data, "=");
-
-  while((token = strtok(NULL, "=")) != NULL){
-    if((strcmp(token, journalToken) == 0)){
-      setJournal(strtok(NULL, "="));
-    }
-    else if((strcmp(token, volumeToken) == 0)){
-      setVolume(strtok(NULL, "="));
-    }
-    else if((strcmp(token, numberToken) == 0)){
-      setNumber(strtok(NULL, "="));
-    }
-    else if((strcmp(token, pagesToken) == 0)){
-      setPages(strtok(NULL, "="));
-    }
-  }
 }

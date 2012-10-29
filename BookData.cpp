@@ -9,39 +9,18 @@ BookData::BookData(void){
 BookData::~BookData(void){
 }
 
-char * BookData::getPlace(){
+string BookData::getPlace(){
 	return place;
 }
 
-char * BookData::getPublisher(){
+string BookData::getPublisher(){
 	return publisher;
 }
 
-void BookData::setPlace(char * place){
+void BookData::setPlace(string place){
 	BookData::place = place;
 }
 
-void BookData::setPublisher(char * publisher){
+void BookData::setPublisher(string publisher){
 	BookData::publisher = publisher;
-}
-
-void BookData::setItem(char * data){
-  char * token;
-
-  strtok(data, "=");
-
-  while((token = strtok(NULL, "=")) != NULL){
-    if((strcmp(token, placeToken) == 0)){
-      setPlace(strtok(NULL, "="));
-    }
-    else if((strcmp(token, publisherToken) == 0)){
-      setPublisher(strtok(NULL, "="));
-    }
-  }
-}
-
-void BookData::print(){
-	printf("%s", getAuthor());
-	printf("%s", getTitle());
-	printf("%s", getDate());
 }

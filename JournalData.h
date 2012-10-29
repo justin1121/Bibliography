@@ -19,27 +19,26 @@
 
 class JournalData : public ResourceData{
 private:
-	char * journal;
-	char * volume;
-	char * number;
-	char * pages;
-
-  const char * journalToken;
-  const char * volumeToken;
-  const char * numberToken;
-  const char * pagesToken;
-
-	void setJournal(char *);
-	void setNumber(char *);
-	void setPages(char *);
-	void setVolume(char *);
-  void setItem(char *);
+	string journal;
+	string volume;
+	string number;
+	string pages;
 public:
 	JournalData(void);
 	~JournalData(void);
-	char * getJournal(void);
-	char * getNumber(void);
-	char * getPages(void);
-	char * getVolume(void);
+
+	const char * journalToken;
+	const char * volumeToken;
+	const char * numberToken;
+	const char * pagesToken;
+
+	string getJournal(void);
+	string getNumber(void);
+	string getPages(void);
+	string getVolume(void);
+	void setJournal(string);
+	void setNumber(string);
+	void setPages(string);
+	void setVolume(string);
 };
 

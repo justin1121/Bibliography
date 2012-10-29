@@ -21,35 +21,34 @@
 
 class ConferenceData : public ResourceData{
 private:
-	char * proceedings;
-	char * placeOfConference;
-	char * dateOfConference;
-	char * city;
-	char * publisher;
-	char * pages;
-
-  const char * proceedingsToken;
-  const char * placeToken;
-  const char * dateToken;
-  const char * cityToken;
-  const char * publisherToken;
-  const char * pagesToken;
-  
-	void setProceedings(char *);
-	void setPlace(char *);
-	void setDate(char *);
-	void setCity(char *);
-	void setPublisher(char *);
-	void setPages(char *);
-  void setItem(char *);
+	string proceedings;
+	string placeOfConference;
+	string dateOfConference;
+	string city;
+	string publisher;
+	string pages;
 public:
 	ConferenceData(void);
 	~ConferenceData(void);
-	char * getProceedings();
-	char * getPlace();
-	char * getDate();
-	char * getCity();
-	char * getPublisher();
-	char * getPages();
+
+	const char * proceedingsToken;
+	const char * placeToken;
+	const char * dateOfConferenceToken;
+	const char * cityToken;
+	const char * publisherToken;
+	const char * pagesToken;
+
+	string getProceedings();
+	string getPlace();
+	string getDateOfConference();
+	string getCity();
+	string getPublisher();
+	string getPages();
+	void setProceedings(string);
+	void setPlace(string);
+	void setDateOfConference(string);
+	void setCity(string);
+	void setPublisher(string);
+	void setPages(string);
 };
 

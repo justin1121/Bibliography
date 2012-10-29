@@ -11,38 +11,34 @@
  * the subclasses.
  ******************************************************************/
 #pragma once
-#include <cstring>
-#include <cstddef>
+#include <string>
+
+using namespace std;
 
 class ResourceData{
 private:
-	char * key;
-	char * author;
-	char * date;
-	char * title;
+	string key;
+	string author;
+	string date;
+	string title;
 	int type;
-protected:
+public:
+	ResourceData();
+
 	const char * keyToken;
 	const char * authorToken; 
 	const char * dateToken;
 	const char * titleToken;
 
-	void setKey(char *);
-	void setAuthor(char *);
-	void setDate(char *);
-	void setTitle(char *);
-	void setType(int);
-	void setBaseItem(char *);
-	virtual void setItem(char *);
-public:
-	ResourceData();
-
-	char * getKey(void);
-	char * getAuthor(void);
-	char * getDate(void);
-	char * getTitle(void);
+	string getKey(void);
+	string getAuthor(void);
+	string getDate(void);
+	string getTitle(void);
 	int getType(void);
-	void setData(int, char *);
-	virtual void print(void);
+	void setKey(string);
+	void setAuthor(string);
+	void setDate(string);
+	void setTitle(string);
+	void setType(int);
 };
 

@@ -147,10 +147,6 @@ void BibliographyParser::parseBibliographyItems(void){
 					itemString = itemString + "\n";
 					
 					/* Set the data and add it to the citation list */
-					d->setData(itemIdentifier, (char *)itemString.c_str());
-					if(d->getType() == 1){
-						d->print();
-					}
 					addCitationList(*d);
 
 					/*reset item's identifier and information string*/
@@ -158,6 +154,7 @@ void BibliographyParser::parseBibliographyItems(void){
 					itemString = "";
 				}else{
 					itemString = itemString + " " + stringToken;
+
 				}
 			}
 		}

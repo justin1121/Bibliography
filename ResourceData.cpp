@@ -1,5 +1,7 @@
+#include <iostream>
 #include "ResourceData.h"
 
+using namespace std;
 ResourceData::ResourceData(){
   keyToken    = "Key";
   authorToken = "Author";
@@ -7,19 +9,19 @@ ResourceData::ResourceData(){
   titleToken  = "Title";
 }
 
-char * ResourceData::getKey(){
+string ResourceData::getKey(){
 	return key;
 }
 
-char * ResourceData::getAuthor(){
+string ResourceData::getAuthor(){
 	return author;
 }
 
-char * ResourceData::getDate(){
+string ResourceData::getDate(){
 	return date;
 }
 
-char * ResourceData::getTitle(){
+string ResourceData::getTitle(){
 	return title;
 }
 
@@ -27,69 +29,22 @@ int ResourceData::getType(){
 	return type;
 }
 
-void ResourceData::setKey(char * key){
+void ResourceData::setKey(string key){
 	ResourceData::key = key;
 }
 
-void ResourceData::setAuthor(char * author){
+void ResourceData::setAuthor(string author){
 	ResourceData::author = author;
 }
 
-void ResourceData::setDate(char * date){
+void ResourceData::setDate(string date){
 	ResourceData::date = date;
 }
 
-void ResourceData::setTitle(char * title){
+void ResourceData::setTitle(string title){
 	ResourceData::title = title;	
 }
 
 void ResourceData::setType(int type){
 	ResourceData::type = type;
-}
-
-void ResourceData::setBaseItem(char * data){
-  char * token;
-
-  strtok(data, "=");
-
-  while((token = strtok(NULL, "=")) != NULL){
-    if((strcmp(token, keyToken) == 0)){
-      setKey(strtok(NULL, "="));
-    }
-    else if((strcmp(token, authorToken) == 0)){
-      setAuthor(strtok(NULL, "="));
-    }
-    else if((strcmp(token, dateToken) == 0)){
-      setDate(strtok(NULL, "="));
-    }
-    else if((strcmp(token, titleToken) == 0)){
-      setTitle(strtok(NULL, "="));
-    }
-  }
-}
-
-void ResourceData::setItem(char * data){
-  return;
-}
-
-void ResourceData::setData(int type, char * data){
-  char * token;
-
-  setType(type);
-
-  strtok(data, ";"); 
-
-  while((token = strtok(NULL, ";")) != NULL){
-	setBaseItem(token); 
-  }
-
-  strtok(data, ";");
-
-  while((token = strtok(NULL, ";")) != NULL){
-	setItem(token);
-  }
-}
-
-void ResourceData::print(){
-	return;
 }
