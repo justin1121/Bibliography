@@ -1,6 +1,7 @@
 #include "OutputCitation.h"
 
 OutputCitation::OutputCitation(void){
+	
 }
 
 OutputCitation::~OutputCitation(void){

@@ -4,7 +4,7 @@
  * 	Organization:	Dalhousie - Faculty of Computer Science
  *	
  * 	Description:
- *	
+ *	Formats ResourceData objects into IEEE format
  */
 
 #pragma once
@@ -12,10 +12,10 @@
 
 class IEEEFormatter : public StyleFormatter{
 private:
-	OutputCitation * formatBook();
-	OutputCitation * formatConference();
-	OutputCitation * formatJournal();
-	OutputCitation * formatTechnicalReport();
+	OutputCitation * formatBook(ResourceData data);
+	OutputCitation * formatConference(ResourceData data);
+	OutputCitation * formatJournal(ResourceData data);
+	OutputCitation * formatTechnicalReport(ResourceData data);
 public:
 	IEEEFormatter(void);
 	~IEEEFormatter(void);

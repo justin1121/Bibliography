@@ -1,8 +1,11 @@
 #pragma once
+#include <string>
+using namespace std;
+
 class OutputCitation
 {
 private:
-	char * citation;
+	string citation;
 public:
 	OutputCitation(void);
 	~OutputCitation(void);
