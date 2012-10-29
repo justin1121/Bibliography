@@ -1,3 +1,19 @@
+/******************************************************************
+ * Name: Justin Patriquin
+ * Date: Oct 27, 2012
+ * Organization: Dalhousie University, Faculty of Computer Science
+ *
+ * Description:
+ *
+ * This class extends the ResourceData base class. It adds the 
+ * variables that are specific to it. 
+ * They are: organization
+ *           number
+ *           place
+ *           publisher
+ * This class also provides the correct setItem implementation to
+ * work with these new variables. Plus all the getters and setters.
+ ******************************************************************/
 #pragma once
 #include "ResourceData.h"
 
@@ -8,16 +24,16 @@ private:
 	char * place;
 	char * publisher;
 
-  const char * organizationToken;
-  const char * numberToken;
-  const char * placeToken;
-  const char * publisherToken;
+    const char * organizationToken;
+    const char * numberToken;
+    const char * placeToken;
+    const char * publisherToken;
   
-	void setOrganization(char *);
-	void setNumber(char *);
-	void setPlace(char *);
-	void setPublisher(char *);
-  void setItem(char *);
+    void setOrganization(char *);
+    void setNumber(char *);
+    void setPlace(char *);
+    void setPublisher(char *);
+    void setItem(char *);
 public:
 	TechnicalReportData(void);
 	~TechnicalReportData(void);

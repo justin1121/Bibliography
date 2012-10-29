@@ -26,10 +26,7 @@ using namespace std;
  * BibliographyParser constructor
  * - initializes the bibliography file name
  */
-BibliographyParser::BibliographyParser (const char* bibFleName ) {
-  list = new CitationList[1];
 BibliographyParser::BibliographyParser(const char* bibFleName, const char * inputFileName) {
-    list = new CitationList[1];
 	BibliographyParser::bibFileName   = bibFleName;
 	BibliographyParser::inputFileName = inputFileName;
 	bookToken                         = "@book{";
@@ -65,7 +62,7 @@ void BibliographyParser::openFiles(void){
 		cout << "Input file opened successfully!\n";
 	}
 	else{
-		cout << "Unable to open inputfile!\n"
+		cout << "Unable to open inputfile!\n";
 	}
 }
 
@@ -113,7 +110,8 @@ void BibliographyParser::parseBibliographyItems(void){
 		string line;
 		int itemIdentifier = 0;
 		string itemString="";
-		
+
+		ResourceData * d;
 		while(bibFile->good())
 		{
 			string stringToken;
@@ -123,25 +121,37 @@ void BibliographyParser::parseBibliographyItems(void){
 			
 			stringstream sStream(line);
 			while (sStream >> stringToken){
+				cout << stringToken << "\n";
 				if (stringToken.compare(bookToken) == 0){
 					/* "reading book information"*/
 					itemIdentifier = 1;
 					itemString = "";
+					d = new BookData();
 				}else if (stringToken.compare(conferenceToken) == 0){
 					/* "reading conference information"*/
 					itemIdentifier = 2;
 					itemString="";
+					d = new ConferenceData();
 				}else if (stringToken.compare(journalToken) == 0){
 					/* "reading journal information"*/
 					itemIdentifier = 3;
 					itemString = "";
+					d = new JournalData();
 				}else if (stringToken.compare(techReportToken)==0){
 					/* "reading technical report information"*/
 					itemIdentifier = 4;
 					itemString = "";
+					d = new TechnicalReportData();
 				}else if ((stringToken.compare(endOfItem)==0) || (stringToken.compare(endOfFile)==0)){
 					/* add the item to the collection */
 					itemString = itemString + "\n";
+					
+					/* Set the data and add it to the citation list */
+					d->setData(itemIdentifier, (char *)itemString.c_str());
+					if(d->getType() == 1){
+						d->print();
+					}
+					addCitationList(*d);
 
 					/*reset item's identifier and information string*/
 					itemIdentifier = 0;
@@ -153,8 +163,8 @@ void BibliographyParser::parseBibliographyItems(void){
 		}
 	}
 	else {
-    cout << "bibliography file not opened \n";
-  }
+		cout << "bibliography file not opened \n";
+	}
 }
 
 /*
@@ -180,13 +190,13 @@ void BibliographyParser::printBibliography(void){
 }
 
 
-CitationList * BibliographyParser::getCitationList(void){
+CitationList BibliographyParser::getCitationList(void){
 	return list;
 }
 
 
-void BibliographyParser::addCitationList(ResourceData * data){
-	list->addCitation(data);
+void BibliographyParser::addCitationList(ResourceData data){
+	list.addCitation(data);
 }
 
 

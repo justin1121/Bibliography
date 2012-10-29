@@ -31,9 +31,9 @@ private:
 	const char   * endOfItem ;			/*string token used to identify end of item  e.g., }  */
 	const char   * endOfFile ;			/*string token used to identify end of file  e.g., }; */
 	const char   * startOfInputToken;
-	CitationList * list;
+	CitationList list;
 
-	void addCitationList(ResourceData *);
+	void addCitationList(ResourceData);
 public:
 	BibliographyParser(const char *, const char *); /*constructor*/
 	~BibliographyParser();						 /*destructor*/	
@@ -44,7 +44,7 @@ public:
 	void parseInputFile(void);
 	void printBibliography(void);					/*display bibliography file into standard output*/	
 
-	CitationList * getCitationList(void);
+	CitationList getCitationList(void);
 };
 
 #endif

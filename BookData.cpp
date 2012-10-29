@@ -1,3 +1,4 @@
+#include <cstdio>
 #include "BookData.h"
 
 BookData::BookData(void){
@@ -37,4 +38,10 @@ void BookData::setItem(char * data){
       setPublisher(strtok(NULL, "="));
     }
   }
+}
+
+void BookData::print(){
+	printf("%s", getAuthor());
+	printf("%s", getTitle());
+	printf("%s", getDate());
 }

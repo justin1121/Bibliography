@@ -1,3 +1,21 @@
+/******************************************************************
+ * Name: Justin Patriquin
+ * Date: Oct 27, 2012
+ * Organization: Dalhousie University, Faculty of Computer Science
+ *
+ * Description:
+ *
+ * This class extends the ResourceData base class. It adds the 
+ * variables that are specific to it. 
+ * They are: proceedings 
+ *           placeOfConference
+ *           dateOfConference
+ *           city
+ *           publisher
+ *           pages
+ * This class also provides the correct setItem implementation to
+ * work with these new variables. Plus all the getters and setters.
+ ******************************************************************/
 #pragma once
 #include "ResourceData.h"
 

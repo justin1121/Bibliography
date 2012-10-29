@@ -89,3 +89,7 @@ void ResourceData::setData(int type, char * data){
 	setItem(token);
   }
 }
+
+void ResourceData::print(){
+	return;
+}
