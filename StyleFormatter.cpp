@@ -19,18 +19,18 @@ OutputCitation * StyleFormatter::format(ResourceData data){
 	return 0; 
 }
 
-OutputCitation * StyleFormatter::formatBook(){
+OutputCitation * StyleFormatter::formatBook(ResourceData data){
 	return 0; 
 }
 
-OutputCitation * StyleFormatter::formatConference(){
+OutputCitation * StyleFormatter::formatConference(ResourceData data){
 	return 0;
 }
 
-OutputCitation * StyleFormatter::formatJournal(){
+OutputCitation * StyleFormatter::formatJournal(ResourceData data){
 	return 0;
 }
 
-OutputCitation * StyleFormatter::formatTechnicalReport(){
+OutputCitation * StyleFormatter::formatTechnicalReport(ResourceData data){
 	return 0;
 }

@@ -14,12 +14,8 @@ IEEEFormatter::IEEEFormatter(void){
 }
 
 IEEEFormatter::~IEEEFormatter(void){
-	cout << "\nkilled the formatter\n";
 }
 
-//the format function needs to take in a resource data type
-//or in this case a string (testing) and create a new string with
-//the chosen format
 OutputCitation * IEEEFormatter::format(ResourceData data){
 	OutputCitation * outCite;
 	
@@ -48,24 +44,26 @@ OutputCitation * IEEEFormatter::format(ResourceData data){
 }
 
 OutputCitation * IEEEFormatter::formatBook(ResourceData data){
-	OutputCitation finalCitation;
+	OutputCitation * finalCitation = new OutputCitation();
 	string referenceUnit = "";
 	
 	//Format the resource into IEEE Book style
 	//Author(s), Book Title. Place of publication: Publisher, year
 	referenceUnit.append((string)data.getAuthor());
+
+	finalCitation->setCitation((char *)referenceUnit.c_str());
 	
-	
+	return finalCitation;
 }
 
 OutputCitation * IEEEFormatter::formatConference(ResourceData data){
-
+	return 0;
 }
 
 OutputCitation * IEEEFormatter::formatJournal(ResourceData data){
-
+	return 0;
 }
 
 OutputCitation * IEEEFormatter::formatTechnicalReport(ResourceData data){
-
+	return 0;
 }
