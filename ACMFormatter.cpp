@@ -133,7 +133,7 @@ OutputCitation * ACMFormatter::formatTechnicalReport(TechnicalReportData * data)
 	referenceUnit = referenceUnit.append(". ");
 	referenceUnit = referenceUnit.append((string)data->getTitle());
 	referenceUnit = referenceUnit.append(". ");
-	referenceUnit = referenceUnit.append((string)data->getCompany());
+	referenceUnit = referenceUnit.append((string)data->getOrganization());
 	referenceUnit = referenceUnit.append(", TR No. ");
 	referenceUnit = referenceUnit.append((string)data->getNumber());
 	referenceUnit = referenceUnit.append(". ");
