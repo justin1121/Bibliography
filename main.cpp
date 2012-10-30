@@ -36,6 +36,8 @@ int main (int argc, char * const argv[]){
 	BibliographyGenerator bgen(bParser.getCitationList(), 1);
 	
 	bgen.generate();
+	
+	bgen.printCitations(pFileName);
 		
 	//system("PAUSE");
 	return 0;

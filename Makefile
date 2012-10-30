@@ -18,8 +18,8 @@ OBJS   = BibliographyParser.o \
 				 StyleFormatter.o \
 				 APAFormatter.o \
 				 IEEEFormatter.o \
-				 OutputCitation.o 
-				 ACMFormatter.o \
+				 OutputCitation.o \
+				 ACMFormatter.o  
 CC     = g++
 CFLAGS = -Wall -g 
 LFLAGS = -Wall -g
