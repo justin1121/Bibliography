@@ -1,3 +1,13 @@
+/******************************************************************
+ * Name: Justin Patriquin
+ * Date: Oct 27, 2012
+ * Organization: Dalhousie University, Faculty of Computer Science
+ *
+ * Description:
+ *
+ * Contains the implemention for all of the getters and setters for
+ * the ConferenceData, pretty straight-forward.
+ ******************************************************************/
 #include "ConferenceData.h"
 
 ConferenceData::ConferenceData(void){

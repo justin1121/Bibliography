@@ -6,6 +6,10 @@
  *  Modified by Justin Patriquin on 12-10-25.
  *  Copyright 2012 Dalhousie University. All rights reserved.
  *
+ *  Added functions for getting and adding the citationlist. Added
+ *  parsing of the input file and extended parsing of the bibliography file.
+ *  Did this by adding many functions for parsing the individual values
+ *  for the different types of works.
  */
 
 #ifndef BIBLIOGRAPHYPARSER_HPP
@@ -38,7 +42,7 @@ private:
 	const char   * startOfInputToken;
 	CitationList list;
 
-	void addCitationList(ResourceData);
+	void addCitationList(ResourceData *);
 	void setBaseResourceData(ResourceData *, string, string);
 	void setBookData(BookData *, string, string);
 	void setJournalData(JournalData *, string, string);

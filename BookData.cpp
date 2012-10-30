@@ -1,4 +1,13 @@
-#include <cstdio>
+/******************************************************************
+ * Name: Justin Patriquin
+ * Date: Oct 27, 2012
+ * Organization: Dalhousie University, Faculty of Computer Science
+ *
+ * Description:
+ *
+ * Contains the implemention for all of the getters and setters for
+ * the BookData, pretty straight-forward.
+ ******************************************************************/
 #include "BookData.h"
 
 BookData::BookData(void){

@@ -1,3 +1,13 @@
+/******************************************************************
+ * Name: Justin Patriquin
+ * Date: Oct 27, 2012
+ * Organization: Dalhousie University, Faculty of Computer Science
+ *
+ * Description:
+ *
+ * Contains the implemention for all of the getters and setters for
+ * the base class of ResourceData, pretty straight-forward.
+ ******************************************************************/
 #include <iostream>
 #include "ResourceData.h"
 
