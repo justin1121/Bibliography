@@ -11,6 +11,10 @@
 #include "StyleFormatter.h"
 
 class IEEEFormatter : public StyleFormatter{
+/*	Each function in this object takes in a pointer to a piece of resource
+ *	data and returns a pointer to the IEEE Output Citation 	
+*/
+
 private:
 	OutputCitation * formatBook(BookData * data);
 	OutputCitation * formatConference(ConferenceData * data);

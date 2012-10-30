@@ -18,20 +18,25 @@
 #include "ResourceData.h"
 #include "BookData.h"
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 using namespace std;
 
 class BibliographyGenerator{
+	/*	Has an inputted list of citations and creates a 
+	*	formatter based on the given type. Adds the formatted
+	*	to an output citation object.
+	*/
+	
 	CitationList 	citeList;
 	StyleFormatter 	* formatter;
 	OutputCitation 	* citation;
-	//list 			outputlist;
-	
+	int 			citeCount;
 public:
 	BibliographyGenerator(CitationList list, int style);
 	~BibliographyGenerator(void);
 	void generate(void);
-	void printCitations(void);
+	void printCitations(string);
 
 	
 };

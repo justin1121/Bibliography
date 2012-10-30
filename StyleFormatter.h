@@ -21,6 +21,10 @@
 using namespace std;
 
 class StyleFormatter{
+/*	This class's derived classes take the Resource datas that have been
+ *	parsed from the Bibliography and format it so that it fits the 
+ * 	desired style of references. 
+*/
 protected:
 	ResourceData data;
 

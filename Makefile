@@ -20,6 +20,7 @@ OBJS   = BibliographyParser.o \
 				 IEEEFormatter.o \
 				 OutputCitation.o \
 				 ACMFormatter.o 
+
 CC     = g++
 CFLAGS = -Wall -g 
 LFLAGS = -Wall -g

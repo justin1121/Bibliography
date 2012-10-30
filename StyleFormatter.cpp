@@ -4,7 +4,7 @@
  * 	Organization:	Dalhousie - Faculty of Computer Science
  *	
  * 	Description:
- *	
+ *		Base class for the different types of formatters. 
  */
 
 #include "StyleFormatter.h"
