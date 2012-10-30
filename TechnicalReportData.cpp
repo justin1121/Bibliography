@@ -34,3 +34,4 @@ void TechnicalReportData::setPlace(string place){
 void TechnicalReportData::setPublisher(string publisher){
 	TechnicalReportData::publisher = publisher;
 }
+

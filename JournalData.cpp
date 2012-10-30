@@ -34,3 +34,4 @@ void JournalData::setNumber(string number){
 void JournalData::setPages(string pages){
 	JournalData::pages = pages;
 }
+

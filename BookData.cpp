@@ -24,3 +24,4 @@ void BookData::setPlace(string place){
 void BookData::setPublisher(string publisher){
 	BookData::publisher = publisher;
 }
+

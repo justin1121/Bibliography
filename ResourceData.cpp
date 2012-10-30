@@ -48,3 +48,4 @@ void ResourceData::setTitle(string title){
 void ResourceData::setType(int type){
 	ResourceData::type = type;
 }
+

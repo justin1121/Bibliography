@@ -11,6 +11,8 @@
 #include <string>
 #include <map>
 #include <cstdlib>
+#include <regex.h>
+#include <sys/types.h>
 
 #include "BibliographyParser.h"
 #include "BookData.h"
@@ -207,6 +209,32 @@ void BibliographyParser::addCitationList(ResourceData data){
 
 
 void BibliographyParser::parseInputFile(void){
+  if(inputFile->is_open()){
+    string line;
+    int err;
+
+    char * regex = "\\\\{.*}";
+    const char * chLine;
+    regex_t * p = new regex_t[sizeof(regex_t)];
+
+    if(err = regcomp(p, regex, REG_ICASE)){
+      printf("%s\n", strerror(err));
+      exit(1);
+    } 
+
+    regmatch_t q[10];
+
+    while(inputFile->good()){
+      getline(*inputFile, line);
+
+      chLine = line.c_str();
+
+      regexec(p, chLine, 10, q, 0);
+      
+      printf("Offset Start 1: %d\n"
+             "Offset End   1: %d\n", q[0].rm_so, q[0].rm_eo); 
+    }
+  } 
 }
 
 void BibliographyParser::setBaseResourceData(ResourceData * data, string token, string valueToken){
