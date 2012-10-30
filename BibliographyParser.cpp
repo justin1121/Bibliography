@@ -117,6 +117,7 @@ void BibliographyParser::parseBibliographyItems(void){
 			getline (*bibFile,line);
 			
 			stringstream sStream(line);
+			//this gets the identifying token for each value possible
 			while (sStream >> idenToken){
 				if (idenToken.compare(bookToken) == 0){
 					/* "reading book information"*/
@@ -135,43 +136,51 @@ void BibliographyParser::parseBibliographyItems(void){
 					itemIdentifier = 4;
 					d = new TechnicalReportData();
 				}else if ((idenToken.compare(endOfItem)==0) || (idenToken.compare(endOfFile)==0)){
-					/* Set the data and add it to the citation list */
-          d->setType(itemIdentifier);
+					/* Set the data type and add it to the citation list */
+					d->setType(itemIdentifier);
 
-        	addCitationList(*d);
-          delete d;
+					addCitationList(d);
 					/*reset item's identifier and information string*/
 					itemIdentifier = 0;
 				}else{
+					// pop the equals sign and than the value off the stream
+					sStream >> tempToken;
+					sStream >> tempToken;
+					
+					//continue until a ';' is found
+					while(tempToken.compare(";") != 0){
+						// add the value to the value string
+						valueString = valueString + tempToken + " "; 
+						//pop next value part of the value off or ';' if it is the end
+						sStream >> tempToken;
+					}
+					//checks the identifying token with each base data parameter.
+					setBaseResourceData(d, idenToken, valueString);
 
-          sStream >> tempToken;
-          sStream >> tempToken;
-          while(tempToken.compare(";") != 0){
-            valueString = valueString + tempToken + " "; 
-            sStream >> tempToken;
-          }
-          setBaseResourceData(d, idenToken, valueString);
-          switch(itemIdentifier){
-            case 1:
-              setBookData((BookData *)d, idenToken, valueString);
-              break;
-            case 2:
-              setConferenceData((ConferenceData *)d, idenToken, valueString);
-              break;
-            case 3:
-              setJournalData((JournalData *)d, idenToken, valueString);
-              break;
-            case 4:
-              setTechnicalReportData((TechnicalReportData *)d, idenToken, valueString);
-              break;
-          }
-          sStream >> tempToken;
+					//checks the type and then checks the identifier with all of the
+					//different types of values for each of the different types of works
+					switch(itemIdentifier){
+					case 1:
+						setBookData((BookData *)d, idenToken, valueString);
+						break;
+					case 2:
+						setConferenceData((ConferenceData *)d, idenToken, valueString);
+						break;
+					case 3:
+						setJournalData((JournalData *)d, idenToken, valueString);
+						break;
+					case 4:
+						setTechnicalReportData((TechnicalReportData *)d, idenToken, valueString);
+						break;
+					}
+					//pops the last thing off 
+					sStream >> tempToken;
 				}
 			}
 		}
 	}
 	else {
-    cout << "bibliography file not opened \n";
+		cout << "bibliography file not opened \n";
 	}
 }
 
@@ -197,13 +206,21 @@ void BibliographyParser::printBibliography(void){
 	}
 }
 
-
+/****************************************************************
+ * getCitationList
+ *
+ * Returns the list.
+ ***************************************************************/
 CitationList BibliographyParser::getCitationList(void){
 	return list;
 }
 
-
-void BibliographyParser::addCitationList(ResourceData data){
+/****************************************************************
+ * addCitationList
+ *
+ * Adds a citation data to a list. 
+ ***************************************************************/
+void BibliographyParser::addCitationList(ResourceData * data){
 	list.addCitation(data);
 }
 
@@ -237,6 +254,13 @@ void BibliographyParser::parseInputFile(void){
   } 
 }
 
+/******************************************************************
+ * setBaseResourceData 
+ *
+ * Checks each of the tokens against each of the types of parameter
+ * and then sets the type to the value of valueToken if it exists
+ * here.
+ *****************************************************************/
 void BibliographyParser::setBaseResourceData(ResourceData * data, string token, string valueToken){
     if(token.compare(data->keyToken) == 0){
         data->setKey(valueToken);
@@ -252,6 +276,11 @@ void BibliographyParser::setBaseResourceData(ResourceData * data, string token, 
     }  
 }
 
+/******************************************************************
+ * setBookData
+ *
+ * Similar to the above but specific to the Book type.
+ *****************************************************************/
 void BibliographyParser::setBookData(BookData * data, string token, string valueToken){
     if(token.compare(data->placeToken) == 0){
         data->setPlace(valueToken);
@@ -262,6 +291,11 @@ void BibliographyParser::setBookData(BookData * data, string token, string value
 
 }
 
+/******************************************************************
+ * setJournalData
+ *
+ * Similar to the above but specific to the Journal type.
+ *****************************************************************/
 void BibliographyParser::setJournalData(JournalData * data, string token, string valueToken){
     if(token.compare(data->journalToken) == 0){
         data->setJournal(valueToken);
@@ -277,6 +311,11 @@ void BibliographyParser::setJournalData(JournalData * data, string token, string
     }  
 }
 
+/******************************************************************
+ * setConferenceData
+ *
+ * Similar to the above but specific to the Conference type.
+ *****************************************************************/
 void BibliographyParser::setConferenceData(ConferenceData * data, string token, string valueToken){
     if(token.compare(data->proceedingsToken) == 0){
         data->setProceedings(valueToken);
@@ -298,6 +337,11 @@ void BibliographyParser::setConferenceData(ConferenceData * data, string token, 
     }   
 }
 
+/******************************************************************
+ * setTechnicalReportData
+ *
+ * Similar to the above but specific to the TechnicalReport type.
+ *****************************************************************/
 void BibliographyParser::setTechnicalReportData(TechnicalReportData * data, 
                                                 string token, string valueToken){
     if(token.compare(data->organizationToken) == 0){

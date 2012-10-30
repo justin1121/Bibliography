@@ -7,7 +7,8 @@
  *
  * This provides and encapsulation of a list of ResourceDatas and
  * provides methods for add a Citation, checking to see if the list
- * is empty and getting the next Citation in the list.
+ * is empty and getting the next Citation in the list. Also provides
+ * a function for getting the amount of entries in the list.
  ******************************************************************/
 #pragma once
 #include <list>
@@ -20,13 +21,13 @@ static int count = 0;
 
 class CitationList{
 private:
-	list<ResourceData> dataList;
+	list<ResourceData *> dataList;
 public:
 	CitationList(void);
 	~CitationList(void);
-	void addCitation(ResourceData);
+	void addCitation(ResourceData *);
 	bool empty(void);
-	ResourceData nextCitation(void);
+	ResourceData * nextCitation(void);
 	int size(void);
 };
 

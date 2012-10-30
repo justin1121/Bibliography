@@ -28,7 +28,7 @@ public:
 
 	string getPlace();
 	string getPublisher();
-  void setPlace(string);
-  void setPublisher(string);
+	void setPlace(string);
+	void setPublisher(string);
 };
 

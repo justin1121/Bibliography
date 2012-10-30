@@ -27,18 +27,18 @@ public:
 	TechnicalReportData(void);
 	~TechnicalReportData(void);
 
-  const char * organizationToken;
-  const char * numberToken;
-  const char * placeToken;
-  const char * publisherToken;
+	const char * organizationToken;
+	const char * numberToken;
+	const char * placeToken;
+	const char * publisherToken;
 
 	string getOrganization(void);
 	string getNumber(void);
 	string getPlace(void);
 	string getPublisher(void);
-  void setOrganization(string);
-  void setNumber(string);
-  void setPlace(string);
-  void setPublisher(string);
+	void setOrganization(string);
+	void setNumber(string);
+	void setPlace(string);
+	void setPublisher(string);
 };
 
