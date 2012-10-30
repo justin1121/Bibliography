@@ -14,12 +14,12 @@ OBJS   = BibliographyParser.o \
 				 ConferenceData.o \
 				 TechnicalReportData.o \
 				 CitationList.o  \
-				 BibliographyGenerator.o \
+			   BibliographyGenerator.o \
 				 StyleFormatter.o \
 				 APAFormatter.o \
 				 IEEEFormatter.o \
-				 OutputCitation.o 
-				 ACMFormatter.o \
+				 OutputCitation.o \
+				 ACMFormatter.o 
 CC     = g++
 CFLAGS = -Wall -g 
 LFLAGS = -Wall -g

@@ -27,7 +27,7 @@ class BibliographyParser {
 private:
 	ifstream     * bibFile;				/*file stream object pointing to the bibliography file*/
 	const char   * bibFileName;		/*bibliography file name*/
-	ifstream     * inputFile;
+	int            inputFile;
 	const char   * inputFileName;
 	const char   * bookToken;			/*string token used to identify book items e.g., @book{ */
 	const char   * conferenceToken;	/*string token used to identify conference items e.g., @conference{ */
@@ -44,6 +44,7 @@ private:
 	void setJournalData(JournalData *, string, string);
 	void setConferenceData(ConferenceData *, string, string);
 	void setTechnicalReportData(TechnicalReportData *, string, string);
+  char * readInputFileLine();
 public:
 	BibliographyParser(const char *, const char *); /*constructor*/
 	~BibliographyParser();						 /*destructor*/	

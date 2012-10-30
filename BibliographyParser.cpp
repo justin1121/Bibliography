@@ -13,6 +13,10 @@
 #include <cstdlib>
 #include <regex.h>
 #include <sys/types.h>
+#include <sys/stat.h>
+#include <cstdio>
+#include <fcntl.h>
+#include <cstddef>
 
 #include "BibliographyParser.h"
 #include "BookData.h"
@@ -50,19 +54,12 @@ BibliographyParser::~BibliographyParser(void){
  */
 void BibliographyParser::openFiles(void){
 	bibFile   = new ifstream(bibFileName);
-	inputFile = new ifstream(inputFileName);
 
 	if (bibFile->is_open()){
 		cout << "Bibliography file opened successfully!\n";
 	}
 	else{
 		cout << "Unable to open bibliography file!\n";
-	}
-	if(inputFile->is_open()){
-		cout << "Input file opened successfully!\n";
-	}
-	else{
-		cout << "Unable to open inputfile!\n";
 	}
 }
 
@@ -77,13 +74,6 @@ void BibliographyParser::closeFiles(void){
 	}
 	else{ 
 		cout << "Unable to close bibliography file \n";
-	}
-	if(inputFile->is_open()){
-		inputFile->close();
-		cout << "Input file close successfully!\n";
-	}
-	else{
-		cout << "Unable to close input file!\n";
 	}
 }
 
@@ -209,32 +199,27 @@ void BibliographyParser::addCitationList(ResourceData data){
 
 
 void BibliographyParser::parseInputFile(void){
-  if(inputFile->is_open()){
-    string line;
-    int err;
+  string line;
+  int err;
 
-    char * regex = "\\\\{.*}";
-    const char * chLine;
-    regex_t * p = new regex_t[sizeof(regex_t)];
+  char * regex = "\\\\cite{.*}";
+  char * chLine = new char[sizeof(char) * 128];
+  regex_t * p = new regex_t[sizeof(regex_t)];
 
-    if(err = regcomp(p, regex, REG_ICASE)){
-      printf("%s\n", strerror(err));
-      exit(1);
-    } 
-
-    regmatch_t q[10];
-
-    while(inputFile->good()){
-      getline(*inputFile, line);
-
-      chLine = line.c_str();
-
-      regexec(p, chLine, 10, q, 0);
-      
-      printf("Offset Start 1: %d\n"
-             "Offset End   1: %d\n", q[0].rm_so, q[0].rm_eo); 
-    }
+  if(err = regcomp(p, regex, REG_ICASE)){
+    printf("%s\n", strerror(err));
+    exit(1);
   } 
+
+  regmatch_t q[10];
+
+  while((chLine = readInputFileLine()) != NULL){
+    printf("%s", chLine);
+    regexec(p, chLine, 10, q, 0);
+      
+    printf("Offset Start 1: %d\n"
+           "Offset End   1: %d\n", q[0].rm_so, q[0].rm_eo); 
+  }
 }
 
 void BibliographyParser::setBaseResourceData(ResourceData * data, string token, string valueToken){
@@ -313,4 +298,26 @@ void BibliographyParser::setTechnicalReportData(TechnicalReportData * data,
         data->setPublisher(valueToken);
     }  
 
+}
+
+char * BibliographyParser::readInputFileLine(){
+  char strbuf[128];
+  char chbuf[1];
+  int index = 0;
+  int err;
+
+  err = read(inputFile, chbuf, 1);
+  while(chbuf[0] != '\n'){
+    if(err == 0){
+      return NULL;
+    }
+    strbuf[index] = chbuf[0];
+    index++;
+    err = read(inputFile, chbuf, 1);
+  }
+
+  if(err == 0 || chbuf[0] == '\n'){
+    return NULL;
+  }
+  return strbuf;
 }
