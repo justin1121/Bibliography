@@ -9,7 +9,7 @@ private:
 public:
 	OutputCitation(void);
 	~OutputCitation(void);
-	char * getCitation(void);
-	void setCitation(char *);
+	string getCitation(void);
+	void setCitation(string);
 };
 

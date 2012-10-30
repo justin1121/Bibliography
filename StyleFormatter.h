@@ -24,14 +24,14 @@ class StyleFormatter{
 protected:
 	ResourceData data;
 
-	OutputCitation * formatBook(ResourceData data);
-	OutputCitation * formatConference(ResourceData data);
-	OutputCitation * formatJournal(ResourceData data);
-	OutputCitation * formatTechnicalReport(ResourceData data);
+	OutputCitation * formatBook(ResourceData * data);
+	OutputCitation * formatConference(ResourceData * data);
+	OutputCitation * formatJournal(ResourceData * data);
+	OutputCitation * formatTechnicalReport(ResourceData * data);
 public:
 	StyleFormatter(void);
 	~StyleFormatter(void);
 
-	OutputCitation * format(ResourceData data);
+	OutputCitation * format(ResourceData * data);
 };
 

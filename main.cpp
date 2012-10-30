@@ -2,7 +2,7 @@
 // just included so will run on wins :)
 #include <sstream>
 #include <fstream>
-
+#include "BibliographyGenerator.h"
 #include "BibliographyParser.h"
 
 using namespace std;
@@ -31,7 +31,11 @@ int main (int argc, char * const argv[]){
 		
 	bParser.openFiles();
 	bParser.parseBibliographyItems();
+	
+	BibliographyGenerator bgen(bParser.getCitationList(), 1);
+	
+	bgen.generate();
 		
-	system("PAUSE");
+	//system("PAUSE");
 	return 0;
 }

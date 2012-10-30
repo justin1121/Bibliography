@@ -15,22 +15,22 @@ StyleFormatter::StyleFormatter(){
 StyleFormatter::~StyleFormatter(){
 }
 
-OutputCitation * StyleFormatter::format(ResourceData data){
+OutputCitation * StyleFormatter::format(ResourceData * data){
 	return 0; 
 }
 
-OutputCitation * StyleFormatter::formatBook(ResourceData data){
+OutputCitation * StyleFormatter::formatBook(ResourceData * data){
 	return 0; 
 }
 
-OutputCitation * StyleFormatter::formatConference(ResourceData data){
+OutputCitation * StyleFormatter::formatConference(ResourceData * data){
 	return 0;
 }
 
-OutputCitation * StyleFormatter::formatJournal(ResourceData data){
+OutputCitation * StyleFormatter::formatJournal(ResourceData * data){
 	return 0;
 }
 
-OutputCitation * StyleFormatter::formatTechnicalReport(ResourceData data){
+OutputCitation * StyleFormatter::formatTechnicalReport(ResourceData * data){
 	return 0;
 }

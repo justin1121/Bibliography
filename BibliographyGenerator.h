@@ -24,7 +24,7 @@ using namespace std;
 class BibliographyGenerator{
 	CitationList 	citeList;
 	StyleFormatter 	* formatter;
-	//OutputCitation 	*citation;
+	OutputCitation 	* citation;
 	//list 			outputlist;
 	
 public:

@@ -12,14 +12,14 @@
 
 class ACMFormatter : public StyleFormatter{
 private:
-	OutputCitation * formatBook(ResourceData data);
-	OutputCitation * formatJournal(ResourceData data);
-	OutputCitation * formatConference(ResourceData data);
-	OutputCitation * formatTechnicalReport(ResourceData data);
+	OutputCitation * formatBook(BookData * data);
+	OutputCitation * formatJournal(JournalData * data);
+	OutputCitation * formatConference(ConferenceData * data);
+	OutputCitation * formatTechnicalReport(TechnicalReportData * data);
 public:
 	ACMFormatter(void);
 	~ACMFormatter(void);
 
-	OutputCitation * format(ResourceData data);
+	OutputCitation * format(ResourceData * data);
 };
 

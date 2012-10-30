@@ -20,3 +20,7 @@ ResourceData CitationList::nextCitation(void){
 bool CitationList::empty(void){
 	return dataList.empty();
 }
+
+int CitationList::size(void){
+	return dataList.size();
+}

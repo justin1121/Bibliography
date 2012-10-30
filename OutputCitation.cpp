@@ -7,10 +7,10 @@ OutputCitation::OutputCitation(void){
 OutputCitation::~OutputCitation(void){
 }
 
-char * OutputCitation::getCitation(void){
+string OutputCitation::getCitation(void){
 	return citation;
 }
 
-void OutputCitation::setCitation(char * citation){
+void OutputCitation::setCitation(string citation){
 	OutputCitation::citation = citation;
 }

@@ -27,5 +27,6 @@ public:
 	void addCitation(ResourceData);
 	bool empty(void);
 	ResourceData nextCitation(void);
+	int size(void);
 };
 

@@ -12,14 +12,14 @@
 
 class IEEEFormatter : public StyleFormatter{
 private:
-	OutputCitation * formatBook(ResourceData data);
-	OutputCitation * formatConference(ResourceData data);
-	OutputCitation * formatJournal(ResourceData data);
-	OutputCitation * formatTechnicalReport(ResourceData data);
+	OutputCitation * formatBook(BookData * data);
+	OutputCitation * formatConference(ConferenceData * data);
+	OutputCitation * formatJournal(JournalData * data);
+	OutputCitation * formatTechnicalReport(TechnicalReportData * data);
 public:
 	IEEEFormatter(void);
 	~IEEEFormatter(void);
 
-	OutputCitation * format(ResourceData data);
+	OutputCitation * format(ResourceData * data);
 };
 
