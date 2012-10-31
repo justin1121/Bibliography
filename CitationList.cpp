@@ -11,6 +11,13 @@
  ******************************************************************/
 #include "CitationList.h"
 
+CitationList::CitationList(){
+
+}
+
+CitationList::~CitationList(){
+
+}
 /*******************************************************************
  * addCitation
  *
