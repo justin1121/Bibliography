@@ -62,16 +62,16 @@ void BibliographyGenerator::printCitations(string filename){
 	 * 	The references will be a appended to the end in a "References"
 	 *	section.
 	*/
-	ofstream outputFile;
-	outputFile.open(filename, ios_base::app);
+	fstream outputFile;
+	outputFile.open(filename.c_str(), fstream::app | fstream::out);
 	
 	outputFile << "\n\nReferences: \n\n";
 	
 	int i;
 	for(i = 0; i < citeCount; i++){
-		outputFile << citation[i];
+		outputFile << citation[i].getCitation();
 		outputFile << "\n";
 	}
 	
-	outputFile.close();
+	outputFile.close(); 
 }
