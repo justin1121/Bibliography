@@ -40,6 +40,7 @@ BibliographyParser::BibliographyParser(const char* bibFleName, const char * inpu
 	endOfItem                         = "}";
 	endOfFile                         = "};";
 	startOfInputToken                 = "/{";
+  keys                              = new string[MAX_REF];
 }
 
 /*
@@ -61,6 +62,12 @@ void BibliographyParser::openFiles(void){
 	else{
 		cout << "Unable to open bibliography file!\n";
 	}
+  if((inputFile = open(inputFileName, O_RDONLY)) != -1){
+    cout << "Input file opened successfully!\n";
+  }
+  else{
+    cout << "Unabled to open input file!\n";
+  }
 }
 
 /*
@@ -219,23 +226,26 @@ void BibliographyParser::parseInputFile(void){
   string line;
   int err;
 
-  char * regex = "\\\\cite{.*}";
-  char * chLine = new char[sizeof(char) * 128];
-  regex_t * p = new regex_t[sizeof(regex_t)];
+  char regex[32] = "\\\\cite";
+  char errbuf[128];
+  char * chLine;
+  regex_t p; 
 
-  if(err = regcomp(p, regex, REG_ICASE)){
-    printf("%s\n", strerror(err));
+  if(err = regcomp(&p, regex, REG_ICASE)){
+    regerror(err, &p, errbuf, 128);
+    cout << errbuf << "\n";
     exit(1);
   } 
 
-  regmatch_t q[10];
+  regmatch_t q[1];
 
+  int index = 0;
   while((chLine = readInputFileLine()) != NULL){
-    printf("%s", chLine);
-    regexec(p, chLine, 10, q, 0);
-      
-    printf("Offset Start 1: %d\n"
-           "Offset End   1: %d\n", q[0].rm_so, q[0].rm_eo); 
+    while(regexec(&p, chLine, 1, q, 0) == 0){
+      addValidKey(getSubStringKey(q[0].rm_eo, chLine), index);
+      index++;
+    }
+    delete chLine;
   }
 }
 
@@ -345,7 +355,7 @@ void BibliographyParser::setTechnicalReportData(TechnicalReportData * data,
 }
 
 char * BibliographyParser::readInputFileLine(){
-  char strbuf[128];
+  char * strbuf = new char[sizeof(char) * MAX_LINE];
   char chbuf[1];
   int index = 0;
   int err;
@@ -355,13 +365,47 @@ char * BibliographyParser::readInputFileLine(){
     if(err == 0){
       return NULL;
     }
+    
     strbuf[index] = chbuf[0];
     index++;
     err = read(inputFile, chbuf, 1);
   }
 
-  if(err == 0 || chbuf[0] == '\n'){
+  strbuf[index] = '\n';
+
+  if(err == 0){
     return NULL;
-  }
+  }  
+
   return strbuf;
+}
+
+char * BibliographyParser::getSubStringKey(int endOffset, char * data){
+  char * key = new char[sizeof(char) * MAX_KEY];
+  int index = 0,
+      dataIndex = endOffset + 1;
+  
+  while(data[dataIndex] != '}'){
+    key[index] = data[dataIndex];
+    index++;
+    dataIndex++;
+  }
+  key[index++] = '\0';
+  
+  index = 0;
+  dataIndex++;
+  while(data[dataIndex] != '\n'){
+    data[index] = data[dataIndex];
+    index++;
+    dataIndex++;
+  }
+
+  data[index] = '\n';
+  data[index++] = '\0';
+
+  return key;
+}
+
+void BibliographyParser::addValidKey(char * key, int index){
+  keys[index] = key;
 }

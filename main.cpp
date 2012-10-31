@@ -32,10 +32,10 @@ int main (int argc, char * const argv[]){
 	bParser.openFiles();
 	bParser.parseBibliographyItems();
   bParser.parseInputFile();
-	
+  
 	BibliographyGenerator bgen(bParser.getCitationList(), 1);
+  bgen.generate();
+  bgen.printCitations("test.txt");
 	
-	bgen.generate();
-		
 	return 0;
 }

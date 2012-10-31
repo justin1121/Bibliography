@@ -25,6 +25,10 @@
 #include "JournalData.h"
 #include "TechnicalReportData.h"
 
+const int MAX_KEY  = 10;
+const int MAX_LINE = 128;
+const int MAX_REF  = 100;
+
 using namespace std;
 
 class BibliographyParser {
@@ -41,6 +45,7 @@ private:
 	const char   * endOfFile ;			/*string token used to identify end of file  e.g., }; */
 	const char   * startOfInputToken;
 	CitationList list;
+  string * keys;
 
 	void addCitationList(ResourceData *);
 	void setBaseResourceData(ResourceData *, string, string);
@@ -49,6 +54,8 @@ private:
 	void setConferenceData(ConferenceData *, string, string);
 	void setTechnicalReportData(TechnicalReportData *, string, string);
   char * readInputFileLine();
+  char * getSubStringKey(int, char *);
+  void addValidKey(char *, int);
 public:
 	BibliographyParser(const char *, const char *); /*constructor*/
 	~BibliographyParser();						 /*destructor*/	

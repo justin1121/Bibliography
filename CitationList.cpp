@@ -10,6 +10,9 @@
  * CitationList to functions correctly.
  ******************************************************************/
 #include "CitationList.h"
+#include <iostream>
+
+using namespace std;
 
 CitationList::CitationList(){
 

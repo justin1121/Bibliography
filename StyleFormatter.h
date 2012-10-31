@@ -25,13 +25,11 @@ class StyleFormatter{
  *	parsed from the Bibliography and format it so that it fits the 
  * 	desired style of references. 
 */
-protected:
-	ResourceData data;
-
-	OutputCitation * formatBook(ResourceData * data);
-	OutputCitation * formatConference(ResourceData * data);
-	OutputCitation * formatJournal(ResourceData * data);
-	OutputCitation * formatTechnicalReport(ResourceData * data);
+private:
+	virtual OutputCitation * formatBook(BookData * data);
+	virtual OutputCitation * formatConference(ConferenceData * data);
+	virtual OutputCitation * formatJournal(JournalData * data);
+	virtual OutputCitation * formatTechnicalReport(TechnicalReportData * data);
 public:
 	StyleFormatter(void);
 	~StyleFormatter(void);

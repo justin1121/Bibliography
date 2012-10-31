@@ -7,8 +7,11 @@
  *		Base class for the different types of formatters. 
  */
 
+#include <cstddef>
+#include <iostream>
 #include "StyleFormatter.h"
 
+using namespace std;
 StyleFormatter::StyleFormatter(){
 }
 
@@ -16,21 +19,22 @@ StyleFormatter::~StyleFormatter(){
 }
 
 OutputCitation * StyleFormatter::format(ResourceData * data){
-	return 0; 
+  cout << "HELLO!\n";
+	return NULL; 
 }
 
-OutputCitation * StyleFormatter::formatBook(ResourceData * data){
-	return 0; 
+OutputCitation * StyleFormatter::formatBook(BookData * data){
+	return NULL; 
 }
 
-OutputCitation * StyleFormatter::formatConference(ResourceData * data){
-	return 0;
+OutputCitation * StyleFormatter::formatConference(ConferenceData * data){
+	return NULL;
 }
 
-OutputCitation * StyleFormatter::formatJournal(ResourceData * data){
-	return 0;
+OutputCitation * StyleFormatter::formatJournal(JournalData * data){
+	return NULL;
 }
 
-OutputCitation * StyleFormatter::formatTechnicalReport(ResourceData * data){
-	return 0;
+OutputCitation * StyleFormatter::formatTechnicalReport(TechnicalReportData * data){
+	return NULL;
 }

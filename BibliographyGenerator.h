@@ -32,6 +32,7 @@ class BibliographyGenerator{
 	StyleFormatter 	* formatter;
 	OutputCitation 	* citation;
 	int 			citeCount;
+  int style;
 public:
 	BibliographyGenerator(CitationList list, int style);
 	~BibliographyGenerator(void);

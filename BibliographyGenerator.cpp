@@ -13,6 +13,10 @@
 BibliographyGenerator::BibliographyGenerator(CitationList list, int style){
 	citeCount = 0;
 	
+  citeList = list;
+	citation = new OutputCitation[citeList.size()]();
+  BibliographyGenerator::style = style;
+
 	//set the style formatter to the selected type
 	switch (style){
 		case 1: 
@@ -31,30 +35,51 @@ BibliographyGenerator::BibliographyGenerator(CitationList list, int style){
 			cout << "Error: style not known";
 			exit(1);
 	}
-	
 }
 
 BibliographyGenerator::~BibliographyGenerator(void){
 	//destroy the necessary objects
-	delete formatter;
-	delete citation;
-	cout << "\ndead\n";
+  delete   formatter;
+  delete[] citation;
 }
 
 //This function takes in each item in the citation list 
 //and sends it to the formatter to be output in the correct style
 void BibliographyGenerator::generate(void){
 	//need an array of Output Citations
-	citation = new OutputCitation[citeList.size()]();
 	
 	/*	Now format all the references to the chosen style.
 	 * 	The returned references are added to the array.
 	 */
-	while(!citeList.empty()){		
-		citation[citeCount] = *(formatter->format(citeList.nextCitation()));
-		citeCount++;
-	}
-	
+  switch(style){
+    case 1:
+	    while(!citeList.empty()){		
+        cout << "HELLO!\n";
+
+		    citation[citeCount] 
+          = *(((IEEEFormatter *)formatter)->format(citeList.nextCitation()));
+		    citeCount++;
+	    }
+      break;
+    case 2:
+	    while(!citeList.empty()){		
+        cout << "HELLO!\n";
+
+		    citation[citeCount] 
+          = *(((APAFormatter *)formatter)->format(citeList.nextCitation()));
+		    citeCount++;
+	    }
+      break;
+    case 3:
+	    while(!citeList.empty()){		
+        cout << "HELLO!\n";
+
+		    citation[citeCount] 
+          = *(((ACMFormatter *)formatter)->format(citeList.nextCitation()));
+		    citeCount++;
+	    }
+      break;
+  }
 }
 
 void BibliographyGenerator::printCitations(string filename){
