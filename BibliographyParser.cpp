@@ -152,6 +152,7 @@ void BibliographyParser::parseBibliographyItems(void){
 						sStream >> tempToken;
 					}
 					//checks the identifying token with each base data parameter.
+          valueString = valueString.substr(0, valueString.size()-1); 
 					setBaseResourceData(d, idenToken, valueString);
 
 					//checks the type and then checks the identifier with all of the

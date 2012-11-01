@@ -24,21 +24,22 @@ OutputCitation * IEEEFormatter::format(ResourceData * data){
 		case 1:
 			//format the resource as a book
 			outCite = formatBook((BookData*)data);		
-			
+      break;
 		case 2:
 			//format the resource as a conference
 			outCite = formatConference((ConferenceData*)data);
-			
+      break;
 		case 3:
 			//format the resource as a journal
 			outCite = formatJournal((JournalData*)data);
-			
+		  break;	
 		case 4:
 			//format the resource as a technical report
 			outCite = formatTechnicalReport((TechnicalReportData*)data);
-			
-		default :
-			exit (1);
+		  break;	
+		default:
+      cout << data->getType() << ": " <<"Style doesn't exist!" << "\n";
+			exit(1);
 	}
 	
 	return outCite;
@@ -50,7 +51,7 @@ OutputCitation * IEEEFormatter::formatBook(BookData * data){
 	
 	//Format the resource into IEEE Book style
 	//Author(s), Book Title. Place of publication: Publisher, year
-	referenceUnit = referenceUnit.append((string)data->getAuthor());
+	referenceUnit += ((string)data->getAuthor());
 	referenceUnit = referenceUnit.append(", ");      
 	referenceUnit = referenceUnit.append((string)data->getTitle());
 	referenceUnit = referenceUnit.append(". ");      

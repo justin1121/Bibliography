@@ -10,6 +10,8 @@
 
 #include "BibliographyGenerator.h"
 
+using namespace std;
+
 BibliographyGenerator::BibliographyGenerator(CitationList list, int style){
 	citeCount = 0;
 	
@@ -54,8 +56,6 @@ void BibliographyGenerator::generate(void){
   switch(style){
     case 1:
 	    while(!citeList.empty()){		
-        cout << "HELLO!\n";
-
 		    citation[citeCount] 
           = *(((IEEEFormatter *)formatter)->format(citeList.nextCitation()));
 		    citeCount++;
@@ -63,8 +63,6 @@ void BibliographyGenerator::generate(void){
       break;
     case 2:
 	    while(!citeList.empty()){		
-        cout << "HELLO!\n";
-
 		    citation[citeCount] 
           = *(((APAFormatter *)formatter)->format(citeList.nextCitation()));
 		    citeCount++;
@@ -72,8 +70,6 @@ void BibliographyGenerator::generate(void){
       break;
     case 3:
 	    while(!citeList.empty()){		
-        cout << "HELLO!\n";
-
 		    citation[citeCount] 
           = *(((ACMFormatter *)formatter)->format(citeList.nextCitation()));
 		    citeCount++;
@@ -87,16 +83,16 @@ void BibliographyGenerator::printCitations(string filename){
 	 * 	The references will be a appended to the end in a "References"
 	 *	section.
 	*/
-	fstream outputFile;
+	/*fstream outputFile;
 	outputFile.open(filename.c_str(), fstream::app | fstream::out);
 	
-	outputFile << "\n\nReferences: \n\n";
+	outputFile << "\n\nReferences: \n\n";*/
 	
 	int i;
 	for(i = 0; i < citeCount; i++){
-		outputFile << citation[i].getCitation();
-		outputFile << "\n";
+		cout << citation[i].getCitation();
+		cout << "\n\n";
 	}
 	
-	outputFile.close(); 
+//	outputFile.close(); 
 }

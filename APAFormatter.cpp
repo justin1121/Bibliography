@@ -22,20 +22,21 @@ OutputCitation * APAFormatter::format(ResourceData * data){
 		case 1:
 			//format the resource as a book
 			outCite = formatBook((BookData*)data);		
-			
+			break;
 		case 2:
 			//format the resource as a conference
 			outCite = formatConference((ConferenceData*)data);
-			
+			break;
 		case 3:
 			//format the resource as a journal
 			outCite = formatJournal((JournalData*)data);
-			
+			break;
 		case 4:
 			//format the resource as a technical report
 			outCite = formatTechnicalReport((TechnicalReportData*)data);
-			
-		default :
+			break;
+		default: 
+      cout << data->getType() << ": " <<"Style doesn't exist!" << "\n";
 			exit (1);
 	}
 	
