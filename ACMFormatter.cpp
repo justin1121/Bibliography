@@ -50,7 +50,7 @@ OutputCitation * ACMFormatter::formatBook(BookData * data){
 	
 	//Format the resource into ACM Book style
 	//Authors. Date. Title. Publisher, Place
-	referenceUnit = referenceUnit.append((string)data->getAuthor());
+	referenceUnit = referenceUnit.append(reverseNames((string)data->getAuthor()));
 	referenceUnit = referenceUnit.append(". ");
 	referenceUnit = referenceUnit.append((string)data->getDate());
 	referenceUnit = referenceUnit.append(". ");
@@ -72,7 +72,7 @@ OutputCitation * ACMFormatter::formatConference(ConferenceData * data){
 	
 	//Format the resource into ACM Conference style
 	//Authors. Date. Title. Proceedings, place of conf, date of conf., pub, city of pub, pages.
-	referenceUnit = referenceUnit.append((string)data->getAuthor());
+	referenceUnit = referenceUnit.append(reverseNames((string)data->getAuthor()));
 	referenceUnit = referenceUnit.append(". ");
 	referenceUnit = referenceUnit.append((string)data->getDate());
 	referenceUnit = referenceUnit.append(". ");
@@ -102,7 +102,7 @@ OutputCitation * ACMFormatter::formatJournal(JournalData * data){
 	
 	//Format the resource into ACM Journal style
 	//Author(s). year. Title. Journal. volume, issue, pages. 
-	referenceUnit = referenceUnit.append((string)data->getAuthor());
+	referenceUnit = referenceUnit.append(reverseNames((string)data->getAuthor()));
 	referenceUnit = referenceUnit.append(". ");
 	referenceUnit = referenceUnit.append((string)data->getDate());
 	referenceUnit = referenceUnit.append(". ");
@@ -128,7 +128,7 @@ OutputCitation * ACMFormatter::formatTechnicalReport(TechnicalReportData * data)
 	
 	//Format the resource into ACM Technical Report style
 	//Author. Date. Title. Company, TR No. #. Publisher, Place
-	referenceUnit = referenceUnit.append((string)data->getAuthor());
+	referenceUnit = referenceUnit.append(reverseNames((string)data->getAuthor()));
 	referenceUnit = referenceUnit.append(". ");
 	referenceUnit = referenceUnit.append((string)data->getDate());
 	referenceUnit = referenceUnit.append(". ");

@@ -16,6 +16,7 @@
 #include "TechnicalReportData.h"
 #include "OutputCitation.h"
 #include <string>
+#include <list>
 #include <cstdlib>
 #include <iostream>
 using namespace std;
