@@ -30,10 +30,15 @@ private:
 	virtual OutputCitation * formatConference(ConferenceData * data);
 	virtual OutputCitation * formatJournal(JournalData * data);
 	virtual OutputCitation * formatTechnicalReport(TechnicalReportData * data);
+
+protected:
+	string reverseNames(string author);
+	
 public:
 	StyleFormatter(void);
 	~StyleFormatter(void);
 
 	OutputCitation * format(ResourceData * data);
+
 };
 

@@ -38,3 +38,20 @@ OutputCitation * StyleFormatter::formatJournal(JournalData * data){
 OutputCitation * StyleFormatter::formatTechnicalReport(TechnicalReportData * data){
 	return NULL;
 }
+
+string reverseNames(string author){
+	string result = "";
+	int lastName = 0;
+	
+	int i;
+	for(i = author.length(); i > 0; i--){
+		if(author[i-1] = ' '){
+			lastName = i+1;
+		}
+	}
+	
+	result += author.substr(lastname, author.length());
+	re
+	
+	return result;
+}
