@@ -57,6 +57,7 @@ private:
   char * readInputFileLine();
   char * getSubStringKey(int, char *, char *);
   void addValidKey(char *, int);
+  void formatTextBody(char *, int, int);
 public:
 	BibliographyParser(const char *, const char *); /*constructor*/
 	~BibliographyParser();						 /*destructor*/	

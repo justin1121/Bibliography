@@ -364,8 +364,7 @@ char * BibliographyParser::getSubStringKey(int endOffset, char * data,
                                            char * file_string){
   char * key = new char[sizeof(char) * MAX_SZ_KEY];
   int index = 0,
-      dataIndex = endOffset + 1,
-      textIndex = strlen(file_string);
+      dataIndex = endOffset + 1;
 
   while(data[dataIndex] != '}'){
     key[index] = data[dataIndex];
@@ -374,14 +373,13 @@ char * BibliographyParser::getSubStringKey(int endOffset, char * data,
   }
   key[index + 1] = '\0';
   
+  formatTextBody(file_string, endOffset, dataIndex + 1);
+
   index = 0;
-  dataIndex++;
   while(data[dataIndex] != '\n'){
-    file_string[textIndex] = data[index];
     data[index] = data[dataIndex];
-    textIndex++;
-    index++;
     dataIndex++;
+    index++;
   }
 
   data[index] = '\n';
@@ -392,4 +390,7 @@ char * BibliographyParser::getSubStringKey(int endOffset, char * data,
 
 void BibliographyParser::addValidKey(char * key, int index){
   keys[index] = key;
+}
+
+void BibliographyParser::formatTextBody(char * file_string, int startToken, int endToken){
 }
