@@ -1,0 +1,44 @@
+@book{
+	Key  =  Hastie-2001 ;
+	Author = Trevor Hastie, Robert Tibshirani, and Jerome H. Friedman ;
+	Date =  2001 ;
+	Title  = The elements of statistical learning: data mining, inference, and prediction ;
+	Place =  New York, NY ;
+	Publisher  =  Springer-Verlag ;
+}
+
+@technicalreport{ 
+	Key = Cox-1984 ;
+	Author =  P.T. Cox and T. Pietrzykowski ;
+	Date =  1984 ;
+	Title =  Advanced programming aids in PROGRAPH ;
+	Organization =  Technical University of Nova Scotia ;
+	Number =   8404 ;
+	Place =  Halifax, NS ;
+	Publisher =  School of Computer Science, Technical University of Nova Scotia ;
+
+}
+
+@journal{
+	Key =  Yager-1977 ;
+	Author =   R.R. Yager ;
+	Date =  July 1977 ;
+	Title =  Multiple objective decision-making using fuzzy sets ;
+	Journal =  International journal of man-machine studies ;
+ 	Volume =  9 ;
+ 	Number =  4 ;
+	Pages =  375-382 ;
+}
+
+@conference{
+ 	Key = Wu-2001 ;
+	Author =  Kun-Lung Wu, Charu C. Aggarwal and Philip S. Yu ;
+	Date = 2001 ;
+	Title =  Personalization with Dynamic Profiler ;
+	Proceedings =   Proceedings Third International Workshop on Advanced Issues of E-Commerce and Web-Based Information Systems, WECWIS 2001 ;
+	Place-of-Conference =  Santa Juan, California ;
+ 	Date-of-Conference =   21-22 June 2001 ;
+ 	City =  Los Alamitos, California ;
+	Publisher  =  IEEE Computer Society ;
+	Pages =  12-20 ;
+};

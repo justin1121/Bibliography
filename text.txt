@@ -1,0 +1,3 @@
+This text is used to illustrate the use of citations and bibliography simulation.
+Here is a reference to a book \cite{Hastie-2001}, 
+to a journal  \cite{Yager-1977}, to a conference paper \cite{Wu-2001}, and to a technical report  \cite{Cox-1984}.
