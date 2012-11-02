@@ -28,14 +28,16 @@ int main (int argc, char * const argv[]){
 	const char * tFileName = pFileName.c_str();
 
 	BibliographyParser bParser(bFileName, tFileName);
+
+  char * file_buffer = new char[sizeof(MAX_CHAR_FILE)];
 		
 	bParser.openFiles();
 	bParser.parseBibliographyItems();
-  bParser.parseInputFile();
+  bParser.parseInputFile(file_buffer);
   
-	BibliographyGenerator bgen(bParser.getCitationList(), 1);
-  bgen.generate();
-  bgen.printCitations("test.txt");
+//	BibliographyGenerator bgen(bParser.getCitationList(), 1);
+//  bgen.generate();
+//  bgen.printCitations("test.txt");
 	
 	return 0;
 }
