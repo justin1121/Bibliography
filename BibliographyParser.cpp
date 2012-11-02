@@ -40,7 +40,7 @@ BibliographyParser::BibliographyParser(const char* bibFleName, const char * inpu
 	endOfItem                         = "}";
 	endOfFile                         = "};";
 	startOfInputToken                 = "/{";
-  keys                              = new string[MAX_REF];
+  keys                              = new string[MAX_NUM_REF];
 }
 
 /*
@@ -182,28 +182,6 @@ void BibliographyParser::parseBibliographyItems(void){
 	}
 }
 
-/*
- *This function prints the bibliography file
- *- line by line, to the standard output
- *- requires an open file stream object, myfile
- */
-void BibliographyParser::printBibliography(void){
-	
-	if (bibFile->is_open()){
-		string line;
-		while(bibFile->good()){
-			string val;
-			// get file information line by line
-			getline(*bibFile, line);
-			// display each line
-			cout << line << endl;
-		}
-	}
-	else{
-		cout << "bibliography file not opened \n";
-	}
-}
-
 /****************************************************************
  * getCitationList
  *
@@ -223,30 +201,30 @@ void BibliographyParser::addCitationList(ResourceData * data){
 }
 
 
-void BibliographyParser::parseInputFile(void){
-  string line;
-  int err;
-
+void BibliographyParser::parseInputFile(char * file_string){
   char regex[32] = "\\\\cite";
   char errbuf[128];
-  char * chLine;
   regex_t p; 
+  int err;
 
   if(err = regcomp(&p, regex, REG_ICASE)){
     regerror(err, &p, errbuf, 128);
-    cout << errbuf << "\n";
+    cout << "Regex Error: "<< errbuf << "\n";
     exit(1);
   } 
 
   regmatch_t q[1];
+  char * chLine;
 
   int index = 0;
   while((chLine = readInputFileLine()) != NULL){
     while(regexec(&p, chLine, 1, q, 0) == 0){
-      addValidKey(getSubStringKey(q[0].rm_eo, chLine), index);
+      addValidKey(getSubStringKey(q[0].rm_eo, chLine, file_string), 
+                                              index);
       index++;
     }
-    delete chLine;
+    strcat(file_string, chLine);
+    delete[] chLine;
   }
 }
 
@@ -356,7 +334,7 @@ void BibliographyParser::setTechnicalReportData(TechnicalReportData * data,
 }
 
 char * BibliographyParser::readInputFileLine(){
-  char * strbuf = new char[sizeof(char) * MAX_LINE];
+  char * strbuf = new char[sizeof(char) * MAX_SZ_LINE];
   char chbuf[1];
   int index = 0;
   int err;
@@ -373,6 +351,7 @@ char * BibliographyParser::readInputFileLine(){
   }
 
   strbuf[index] = '\n';
+  strbuf[index + 1] = '\0';
 
   if(err == 0){
     return NULL;
@@ -381,28 +360,32 @@ char * BibliographyParser::readInputFileLine(){
   return strbuf;
 }
 
-char * BibliographyParser::getSubStringKey(int endOffset, char * data){
-  char * key = new char[sizeof(char) * MAX_KEY];
+char * BibliographyParser::getSubStringKey(int endOffset, char * data,
+                                           char * file_string){
+  char * key = new char[sizeof(char) * MAX_SZ_KEY];
   int index = 0,
-      dataIndex = endOffset + 1;
-  
+      dataIndex = endOffset + 1,
+      textIndex = strlen(file_string);
+
   while(data[dataIndex] != '}'){
     key[index] = data[dataIndex];
     index++;
     dataIndex++;
   }
-  key[index++] = '\0';
+  key[index + 1] = '\0';
   
   index = 0;
   dataIndex++;
   while(data[dataIndex] != '\n'){
+    file_string[textIndex] = data[index];
     data[index] = data[dataIndex];
+    textIndex++;
     index++;
     dataIndex++;
   }
 
   data[index] = '\n';
-  data[index++] = '\0';
+  data[index + 1] = '\0';
 
   return key;
 }

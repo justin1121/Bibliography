@@ -25,9 +25,10 @@
 #include "JournalData.h"
 #include "TechnicalReportData.h"
 
-const int MAX_KEY  = 10;
-const int MAX_LINE = 128;
-const int MAX_REF  = 100;
+const int MAX_SZ_KEY    = 10;
+const int MAX_SZ_LINE   = 128;
+const int MAX_NUM_REF   = 100;
+const int MAX_CHAR_FILE = 128000;
 
 using namespace std;
 
@@ -54,7 +55,7 @@ private:
 	void setConferenceData(ConferenceData *, string, string);
 	void setTechnicalReportData(TechnicalReportData *, string, string);
   char * readInputFileLine();
-  char * getSubStringKey(int, char *);
+  char * getSubStringKey(int, char *, char *);
   void addValidKey(char *, int);
 public:
 	BibliographyParser(const char *, const char *); /*constructor*/
@@ -63,7 +64,7 @@ public:
 	void openFiles(void);
 	void closeFiles(void);
 	void parseBibliographyItems(void);				/*parse the bibliography file*/	
-	void parseInputFile(void);
+	void parseInputFile(char *);
 	void printBibliography(void);					/*display bibliography file into standard output*/	
 
 	CitationList getCitationList(void);

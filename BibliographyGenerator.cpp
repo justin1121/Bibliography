@@ -83,16 +83,16 @@ void BibliographyGenerator::printCitations(string filename){
 	 * 	The references will be a appended to the end in a "References"
 	 *	section.
 	*/
-	/*fstream outputFile;
+	fstream outputFile;
 	outputFile.open(filename.c_str(), fstream::app | fstream::out);
 	
-	outputFile << "\n\nReferences: \n\n";*/
+	outputFile << "\n\nReferences: \n\n";
 	
 	int i;
 	for(i = 0; i < citeCount; i++){
-		cout << citation[i].getCitation();
-		cout << "\n\n";
+		outputFile << citation[i].getCitation();
+		outputFile << "\n\n";
 	}
 	
-//	outputFile.close(); 
+	outputFile.close(); 
 }

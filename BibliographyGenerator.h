@@ -20,7 +20,6 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
-using namespace std;
 
 class BibliographyGenerator{
 	/*	Has an inputted list of citations and creates a 
