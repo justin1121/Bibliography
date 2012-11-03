@@ -13,6 +13,7 @@ OBJS   = BibliographyParser.o \
 				 JournalData.o \
 				 ConferenceData.o \
 				 TechnicalReportData.o \
+				 WebsiteData.o \
 				 CitationList.o  \
 			   BibliographyGenerator.o \
 				 StyleFormatter.o \

@@ -137,4 +137,26 @@ OutputCitation * IEEEFormatter::formatTechnicalReport(TechnicalReportData * data
 	finalCitation->setCitation(referenceUnit);
 	
 	return finalCitation;
-	}
+}
+
+OutputCitation * IEEEFormatter::formatWebsite(WebsiteData * data){
+	OutputCitation * finalCitation = new OutputCitation();
+	string referenceUnit = "";
+	
+	//Format the resource into IEEE Website style
+	//Author, "title," date, URL
+	referenceUnit = referenceUnit.append((string)data->getAuthor());
+	referenceUnit = referenceUnit.append(", \"");      
+	referenceUnit = referenceUnit.append((string)data->getTitle());
+	referenceUnit = referenceUnit.append(",\" ");      
+	referenceUnit = referenceUnit.append((string)data->getDate());
+	referenceUnit = referenceUnit.append(", ");
+	referenceUnit = referenceUnit.append((string)data->getURL());
+	referenceUnit = referenceUnit.append(". ");      
+	
+	
+	finalCitation->setCitation(referenceUnit);
+	
+	return finalCitation;
+}
+

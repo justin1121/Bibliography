@@ -14,6 +14,7 @@
 #include "ConferenceData.h"
 #include "JournalData.h"
 #include "TechnicalReportData.h"
+#include "WebsiteData.h"
 #include "OutputCitation.h"
 #include <string>
 #include <list>
@@ -31,10 +32,8 @@ private:
 	virtual OutputCitation * formatConference(ConferenceData * data);
 	virtual OutputCitation * formatJournal(JournalData * data);
 	virtual OutputCitation * formatTechnicalReport(TechnicalReportData * data);
+	virtual OutputCitation * formatWebsite(WebsiteData * data);
 
-protected:
-	string reverseNames(string author);
-	
 public:
 	StyleFormatter(void);
 	~StyleFormatter(void);

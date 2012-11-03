@@ -49,7 +49,7 @@ OutputCitation * APAFormatter::formatBook(BookData * data){
 	
 	//Format the resource into APA Book style
 	//Author, A. A. (Year). Title of work. Location: Publisher.
-	referenceUnit = referenceUnit.append(reverseNames((string)data->getAuthor()));
+	referenceUnit = referenceUnit.append((string)data->getAuthor());
 	referenceUnit = referenceUnit.append("(");
 	referenceUnit = referenceUnit.append((string)data->getDate());
 	referenceUnit = referenceUnit.append("). ");
@@ -71,7 +71,7 @@ OutputCitation * APAFormatter::formatConference(ConferenceData * data){
 	
 	//Format the resource into APA Conference style
 	//Author(s). (Year). Title. Proceedings, Place, Date-of-Conference. City: Publisher. pages
-	referenceUnit = referenceUnit.append(reverseNames((string)data->getAuthor()));
+	referenceUnit = referenceUnit.append((string)data->getAuthor());
 	referenceUnit = referenceUnit.append("(");
 	referenceUnit = referenceUnit.append((string)data->getDate());
 	referenceUnit = referenceUnit.append("). ");
@@ -102,7 +102,7 @@ OutputCitation * APAFormatter::formatJournal(JournalData * data){
 	//Format the resource into APA Journal style
 	//Author, A. (date). Name of Article. Name of Journal, Volume(Issue), Page.
 
-	referenceUnit = referenceUnit.append(reverseNames((string)data->getAuthor()));
+	referenceUnit = referenceUnit.append((string)data->getAuthor());
 	referenceUnit = referenceUnit.append("(");
 	referenceUnit = referenceUnit.append((string)data->getDate());
 	referenceUnit = referenceUnit.append("). ");
@@ -128,7 +128,7 @@ OutputCitation * APAFormatter::formatTechnicalReport(TechnicalReportData * data)
 	
 	//Format the resource into APA Technical Report style
 	//Author (year). Title (Organization Report No. number). place: publisher.
-	referenceUnit = referenceUnit.append(reverseNames((string)data->getAuthor()));
+	referenceUnit = referenceUnit.append((string)data->getAuthor());
 	referenceUnit = referenceUnit.append("(");
 	referenceUnit = referenceUnit.append((string)data->getDate());
 	referenceUnit = referenceUnit.append("). ");
@@ -142,6 +142,29 @@ OutputCitation * APAFormatter::formatTechnicalReport(TechnicalReportData * data)
 	referenceUnit = referenceUnit.append(": ");
 	referenceUnit = referenceUnit.append((string)data->getPublisher());
 	referenceUnit = referenceUnit.append(". ");
+	
+	finalCitation->setCitation(referenceUnit);
+	
+	return finalCitation;
+}
+
+OutputCitation * APAFormatter::formatWebsite(WebsiteData * data){
+	OutputCitation * finalCitation = new OutputCitation();
+	string referenceUnit = "";
+	
+	//Format the resource into APA Website style
+	//author. (date). Title. Site. Retrieved from URL
+	referenceUnit = referenceUnit.append((string)data->getAuthor());
+	referenceUnit = referenceUnit.append(". (");      
+	referenceUnit = referenceUnit.append((string)data->getDate());
+	referenceUnit = referenceUnit.append("). ");      
+	referenceUnit = referenceUnit.append((string)data->getTitle());
+	referenceUnit = referenceUnit.append(". ");
+	referenceUnit = referenceUnit.append((string)data->getSite());
+	referenceUnit = referenceUnit.append(". Retrieved from ");
+	referenceUnit = referenceUnit.append((string)data->getURL());
+	referenceUnit = referenceUnit.append(". ");      
+	
 	
 	finalCitation->setCitation(referenceUnit);
 	

@@ -20,6 +20,8 @@ private:
 	OutputCitation * formatConference(ConferenceData * data);
 	OutputCitation * formatJournal(JournalData * data);
 	OutputCitation * formatTechnicalReport(TechnicalReportData * data);
+	OutputCitation * formatWebsite(WebsiteData * data);
+
 public:
 	APAFormatter(void);
 	~APAFormatter(void);
