@@ -179,6 +179,7 @@ void BibliographyParser::parseBibliographyItems(void){
             setWebsiteData((WebsiteData *) d, idenToken, valueString);
             break;
 					}
+
 					//pops the last thing off 
 					sStream >> tempToken;
 				}
@@ -209,12 +210,26 @@ void BibliographyParser::addCitationList(ResourceData * data){
 }
 
 
+/****************************************************************
+ * parseInputFile 
+ *
+ * Parses the input file for all of the keys and the spots in the
+ * text that will be needed for in text citation. 
+ *
+ * For some reason I used regular expressions. Turned out it was 
+ * a bad idea, but I crossed the point of no return....before
+ * I realised.
+ ***************************************************************/
 void BibliographyParser::parseInputFile(string *  file_string){
+  // regular expression, search for \cite
   char regex[32] = "\\\\cite";
+
   char errbuf[128];
   regex_t p; 
   int err;
 
+  // compile the regex and spit out an error if there is any
+  // shouldn't be any though
   if(err = regcomp(&p, regex, REG_ICASE)){
     regerror(err, &p, errbuf, 128);
     cout << "Regex Error: "<< errbuf << "\n";
@@ -225,20 +240,30 @@ void BibliographyParser::parseInputFile(string *  file_string){
   char * chLine;
   int index = 0;
   bool check;
+
+  // read in a line from the input file.
   while((chLine = readInputFileLine()) != NULL){
     check = false;
+    // execute the search until there is no more found
+    // on the line
     while((err = regexec(&p, chLine, 1, q, 0)) == 0){
       check = true;
+      // add a valid key to a list of keys by gettings the substring
       addValidKey(getSubStringKey(q[0].rm_eo, chLine, file_string), 
                                               index);
       index++;
     }
+    // if not check then there shouldn't \cite markers on the line
+    // so just add the whole thing to the file_string
     if(!check){
       *file_string += chLine;
     }
+    // if there is some then add a newline
     else{
       *file_string += "\n";
     }
+    
+    //delete the line and then get another!
     delete[] chLine;
   }
 }
@@ -363,6 +388,13 @@ void BibliographyParser::setWebsiteData(WebsiteData * data,
     }  
 }
 
+/******************************************************************
+ * readInputFileLine 
+ *
+ * Reads a line of text from the input file one at a time. Returns
+ * null when it reaches the end of the file and a line every
+ * other time.
+ *****************************************************************/
 char * BibliographyParser::readInputFileLine(){
   char * strbuf = new char[sizeof(char) * MAX_SZ_LINE];
   char chbuf[1];
@@ -391,6 +423,17 @@ char * BibliographyParser::readInputFileLine(){
   return strbuf;
 }
 
+/******************************************************************
+ * getSubStringKey 
+ *
+ * This is a pretty weird function and does more than the name of
+ * it. Some smelly code...
+ *
+ * First is search through the list to get the key and then it
+ * calls a format method to format the text body for in text 
+ * citations. Then, it rights over the data string to get rid of
+ * the text that was already searched.
+ *****************************************************************/
 char * BibliographyParser::getSubStringKey(int endOffset, char * data,
                                            string * file_string){
   char * key = new char[sizeof(char) * MAX_SZ_KEY];
@@ -421,23 +464,41 @@ char * BibliographyParser::getSubStringKey(int endOffset, char * data,
   return key;
 }
 
+/******************************************************************
+ * addValidKey 
+ *
+ * Takes in a key and an index and adds the key to that index in
+ * the list of keys.
+ *****************************************************************/
 void BibliographyParser::addValidKey(char * key, int index){
   keys[index] = key;
 }
-
+/******************************************************************
+ * formatTextBody
+ *
+ * Takes in the file string and inserts the data with identifiers
+ * for where the in text citations will go in the future!.
+ *****************************************************************/
 void BibliographyParser::formatTextBody(string * file_string, 
                                         char * line,
                                         int startToken, 
                                         int endToken){
   string temp = line;
   
+  // if it is the end of the line then make sure
+  // that it grabs the character at the end.
   if(temp[endToken + 3] == '\n'){
     temp = temp.substr(0, endToken + 2);
   }
   else{
     temp = temp.substr(0, endToken + 1);
   }
+
+  // erase the citation from the line
   temp.erase(startToken, endToken - startToken + 1);
+
+  // place in the identifying character, in this case 
+  // it is '~'
   temp.insert(startToken, "~");
 
   *file_string += temp;

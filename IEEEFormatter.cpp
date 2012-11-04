@@ -45,12 +45,8 @@ OutputCitation * IEEEFormatter::format(ResourceData * data){
 
 	// create an in-text citation and add it to the list
 
-  // convert citeCount to string
-  ostringstream convert;
-  convert << citeCount;
-
 	string inTextCite = "[";
-	inTextCite += convert.str();
+	inTextCite += numberToString(citeCount);
 	inTextCite += "]";
 	addInText(inTextCite);
 	
@@ -61,7 +57,7 @@ OutputCitation * IEEEFormatter::format(ResourceData * data){
 OutputCitation * IEEEFormatter::formatBook(BookData * data){
 	OutputCitation * finalCitation = new OutputCitation();
 	string referenceUnit = "[";
-	referenceUnit += ++citeCount;
+	referenceUnit += numberToString(++citeCount);
 	referenceUnit += "] ";
 	
 	//Format the resource into IEEE Book style
@@ -84,7 +80,7 @@ OutputCitation * IEEEFormatter::formatBook(BookData * data){
 OutputCitation * IEEEFormatter::formatConference(ConferenceData * data){
 	OutputCitation * finalCitation = new OutputCitation();
 	string referenceUnit = "[";
-	referenceUnit += ++citeCount;
+	referenceUnit += numberToString(++citeCount);
 	referenceUnit += "] ";
 	
 	//Format the resource into IEEE Conference style
@@ -107,7 +103,7 @@ OutputCitation * IEEEFormatter::formatConference(ConferenceData * data){
 OutputCitation * IEEEFormatter::formatJournal(JournalData * data){
 	OutputCitation * finalCitation = new OutputCitation();
 	string referenceUnit = "[";
-	referenceUnit += ++citeCount;
+	referenceUnit += numberToString(++citeCount);
 	referenceUnit += "] ";
 	
 	//Format the resource into IEEE Journal style
@@ -135,7 +131,7 @@ OutputCitation * IEEEFormatter::formatJournal(JournalData * data){
 OutputCitation * IEEEFormatter::formatTechnicalReport(TechnicalReportData * data){
 	OutputCitation * finalCitation = new OutputCitation();
 	string referenceUnit = "[";
-	referenceUnit += ++citeCount;
+	referenceUnit += numberToString(++citeCount);
 	referenceUnit += "] ";
 	
 	//Format the resource into IEEE TechnicalReport style
@@ -163,7 +159,7 @@ OutputCitation * IEEEFormatter::formatTechnicalReport(TechnicalReportData * data
 OutputCitation * IEEEFormatter::formatWebsite(WebsiteData * data){
 	OutputCitation * finalCitation = new OutputCitation();
 	string referenceUnit = "[";
-	referenceUnit += ++citeCount;
+	referenceUnit += numberToString(++citeCount);
 	referenceUnit += "] ";
 	
 	//Format the resource into IEEE Website style
@@ -183,3 +179,9 @@ OutputCitation * IEEEFormatter::formatWebsite(WebsiteData * data){
 	return finalCitation;
 }
 
+string IEEEFormatter::numberToString(int number){
+  ostringstream convert;
+  convert << number;
+
+  return convert.str();
+}

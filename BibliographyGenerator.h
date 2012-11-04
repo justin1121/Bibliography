@@ -37,7 +37,7 @@ public:
 	~BibliographyGenerator(void);
 	void generate(void);
 	void printCitations(string);
-	void printInText(string);
+	void printInText(string, string);
 	
 };
 

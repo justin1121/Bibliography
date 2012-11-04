@@ -97,13 +97,13 @@ void BibliographyGenerator::printCitations(string filename){
 	outputFile.close(); 
 }
 
-void BibliographyGenerator::printInText(string fileString){
+void BibliographyGenerator::printInText(string fileString, string fileName){
 	/*	This function prints the in-text citations into the original file.
 	 *	It takes in the file's data and adds the citations to the appropriate locations
 	 *
 	*/
 	fstream outputFile;
-	outputFile.open("test.txt", fstream::app | fstream::out);
+	outputFile.open(fileName.c_str(), fstream::app | fstream::out);
 	list<string> insertList = formatter->getInTextList();
 	
 	int i = 0;
