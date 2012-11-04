@@ -241,8 +241,6 @@ void BibliographyParser::parseInputFile(string *  file_string){
     }
     delete[] chLine;
   }
-
-  cout << keys[1] << "\n";
 }
 
 /******************************************************************
@@ -432,10 +430,15 @@ void BibliographyParser::formatTextBody(string * file_string,
                                         int startToken, 
                                         int endToken){
   string temp = line;
-
-  temp = temp.substr(0, endToken + 1);
+  
+  if(temp[endToken + 3] == '\n'){
+    temp = temp.substr(0, endToken + 2);
+  }
+  else{
+    temp = temp.substr(0, endToken + 1);
+  }
   temp.erase(startToken, endToken - startToken + 1);
-  temp.insert(startToken, "%s");
+  temp.insert(startToken, "~");
 
   *file_string += temp;
 }
