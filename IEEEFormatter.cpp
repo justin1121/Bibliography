@@ -44,7 +44,6 @@ OutputCitation * IEEEFormatter::format(ResourceData * data){
 	}
 
 	// create an in-text citation and add it to the list
-	citeCount++;	
 
   // convert citeCount to string
   ostringstream convert;
@@ -61,7 +60,9 @@ OutputCitation * IEEEFormatter::format(ResourceData * data){
 
 OutputCitation * IEEEFormatter::formatBook(BookData * data){
 	OutputCitation * finalCitation = new OutputCitation();
-	string referenceUnit = "";
+	string referenceUnit = "[";
+	referenceUnit += ++citeCount;
+	referenceUnit += "] ";
 	
 	//Format the resource into IEEE Book style
 	//Author(s), Book Title. Place of publication: Publisher, year
@@ -82,7 +83,9 @@ OutputCitation * IEEEFormatter::formatBook(BookData * data){
 
 OutputCitation * IEEEFormatter::formatConference(ConferenceData * data){
 	OutputCitation * finalCitation = new OutputCitation();
-	string referenceUnit = "";
+	string referenceUnit = "[";
+	referenceUnit += ++citeCount;
+	referenceUnit += "] ";
 	
 	//Format the resource into IEEE Conference style
 	//Author, “Title of paper,” Proceedings, date, pp.
@@ -103,7 +106,9 @@ OutputCitation * IEEEFormatter::formatConference(ConferenceData * data){
 
 OutputCitation * IEEEFormatter::formatJournal(JournalData * data){
 	OutputCitation * finalCitation = new OutputCitation();
-	string referenceUnit = "";
+	string referenceUnit = "[";
+	referenceUnit += ++citeCount;
+	referenceUnit += "] ";
 	
 	//Format the resource into IEEE Journal style
 	//Author(s), "Article title", Journal Title, vol. #, no. #, pp. #, date
@@ -129,7 +134,9 @@ OutputCitation * IEEEFormatter::formatJournal(JournalData * data){
 
 OutputCitation * IEEEFormatter::formatTechnicalReport(TechnicalReportData * data){
 	OutputCitation * finalCitation = new OutputCitation();
-	string referenceUnit = "";
+	string referenceUnit = "[";
+	referenceUnit += ++citeCount;
+	referenceUnit += "] ";
 	
 	//Format the resource into IEEE TechnicalReport style
 	//Author, Title, Abbrev. Name of Co., Report xxx. City of Co., Abbrev. State, Publisher, year
@@ -155,7 +162,9 @@ OutputCitation * IEEEFormatter::formatTechnicalReport(TechnicalReportData * data
 
 OutputCitation * IEEEFormatter::formatWebsite(WebsiteData * data){
 	OutputCitation * finalCitation = new OutputCitation();
-	string referenceUnit = "";
+	string referenceUnit = "[";
+	referenceUnit += ++citeCount;
+	referenceUnit += "] ";
 	
 	//Format the resource into IEEE Website style
 	//Author, "title," date, URL

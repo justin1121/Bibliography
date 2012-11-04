@@ -41,11 +41,13 @@ OutputCitation * APAFormatter::format(ResourceData * data){
 	}
 	
 	// add an in-text citation to the list
+	string citeAuthor 	= data->getKey().substr(0, citeKey.size()-5);
+	string citeDate		= data->getDate();
 	string inTextCite = "";
 	inTextCite += "(";
-	inTextCite += data->getAuthor();
+	inTextCite += citeAuthor;
 	inTextCite += ", ";
-	inTextCite += data->getDate();
+	inTextCite += citeDate;
 	inTextCite += ")";
 	addInText(inTextCite);
 	
