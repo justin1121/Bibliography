@@ -23,6 +23,7 @@
 #include "ConferenceData.h"
 #include "JournalData.h"
 #include "TechnicalReportData.h"
+#include "WebsiteData.h"
 
 using namespace std;
 
@@ -37,6 +38,7 @@ BibliographyParser::BibliographyParser(const char* bibFleName, const char * inpu
 	conferenceToken                   = "@conference{";
 	journalToken                      = "@journal{";
 	techReportToken                   = "@technicalreport{";
+  websiteToken                      = "@website{";
 	endOfItem                         = "}";
 	endOfFile                         = "};";
 	startOfInputToken                 = "/{";
@@ -132,7 +134,10 @@ void BibliographyParser::parseBibliographyItems(void){
 					/* "reading technical report information"*/
 					itemIdentifier = 4;
 					d = new TechnicalReportData();
-				}else if ((idenToken.compare(endOfItem)==0) || (idenToken.compare(endOfFile)==0)){
+				}else if(idenToken.compare(websiteToken)==0){
+          itemIdentifier = 5;
+          d = new WebsiteData();
+        }else if ((idenToken.compare(endOfItem)==0) || (idenToken.compare(endOfFile)==0)){
 					/* Set the data type and add it to the citation list */
 					d->setType(itemIdentifier);
 
@@ -170,6 +175,9 @@ void BibliographyParser::parseBibliographyItems(void){
 					case 4:
 						setTechnicalReportData((TechnicalReportData *)d, idenToken, valueString);
 						break;
+          case 5:
+            setWebsiteData((WebsiteData *) d, idenToken, valueString);
+            break;
 					}
 					//pops the last thing off 
 					sStream >> tempToken;
@@ -201,7 +209,7 @@ void BibliographyParser::addCitationList(ResourceData * data){
 }
 
 
-void BibliographyParser::parseInputFile(char * file_string){
+void BibliographyParser::parseInputFile(string *  file_string){
   char regex[32] = "\\\\cite";
   char errbuf[128];
   regex_t p; 
@@ -215,15 +223,22 @@ void BibliographyParser::parseInputFile(char * file_string){
 
   regmatch_t q[1];
   char * chLine;
-
   int index = 0;
+  bool check;
   while((chLine = readInputFileLine()) != NULL){
-    while(regexec(&p, chLine, 1, q, 0) == 0){
+    check = false;
+    while((err = regexec(&p, chLine, 1, q, 0)) == 0){
+      check = true;
       addValidKey(getSubStringKey(q[0].rm_eo, chLine, file_string), 
                                               index);
       index++;
     }
-    strcat(file_string, chLine);
+    if(!check){
+      *file_string += chLine;
+    }
+    else{
+      *file_string += "\n";
+    }
     delete[] chLine;
   }
 }
@@ -333,6 +348,21 @@ void BibliographyParser::setTechnicalReportData(TechnicalReportData * data,
 
 }
 
+/******************************************************************
+ * setWebsiteData
+ *
+ * Similar to the above but specific to the Website type.
+ *****************************************************************/
+void BibliographyParser::setWebsiteData(WebsiteData * data, 
+                                        string token, string valueToken){
+    if(token.compare(data->siteToken) == 0){
+        data->setSite(valueToken);
+    }  
+    else if(token.compare(data->urlToken) == 0){
+        data->setURL(valueToken);
+    }  
+}
+
 char * BibliographyParser::readInputFileLine(){
   char * strbuf = new char[sizeof(char) * MAX_SZ_LINE];
   char chbuf[1];
@@ -354,6 +384,7 @@ char * BibliographyParser::readInputFileLine(){
   strbuf[index + 1] = '\0';
 
   if(err == 0){
+
     return NULL;
   }  
 
@@ -361,7 +392,7 @@ char * BibliographyParser::readInputFileLine(){
 }
 
 char * BibliographyParser::getSubStringKey(int endOffset, char * data,
-                                           char * file_string){
+                                           string * file_string){
   char * key = new char[sizeof(char) * MAX_SZ_KEY];
   int index = 0,
       dataIndex = endOffset + 1;
@@ -373,10 +404,12 @@ char * BibliographyParser::getSubStringKey(int endOffset, char * data,
   }
   key[index + 1] = '\0';
   
-  formatTextBody(file_string, endOffset, dataIndex + 1);
+  formatTextBody(file_string, data, endOffset - 5, dataIndex);
+
+  dataIndex++;
 
   index = 0;
-  while(data[dataIndex] != '\n'){
+  while(dataIndex < strlen(data)){
     data[index] = data[dataIndex];
     dataIndex++;
     index++;
@@ -392,5 +425,20 @@ void BibliographyParser::addValidKey(char * key, int index){
   keys[index] = key;
 }
 
-void BibliographyParser::formatTextBody(char * file_string, int startToken, int endToken){
+void BibliographyParser::formatTextBody(string * file_string, 
+                                        char * line,
+                                        int startToken, 
+                                        int endToken){
+  string temp = line;
+  
+  if(temp[endToken + 3] == '\n'){
+    temp = temp.substr(0, endToken + 2);
+  }
+  else{
+    temp = temp.substr(0, endToken + 1);
+  }
+  temp.erase(startToken, endToken - startToken + 1);
+  temp.insert(startToken, "~");
+
+  *file_string += temp;
 }
