@@ -42,10 +42,10 @@ OutputCitation * StyleFormatter::formatWebsite(WebsiteData * data){
 	return NULL;
 }
 
-list getInTextList(){
-	return N;
+list<string> StyleFormatter::getInTextList(){
+	return inTextList;
 }
 
-void addInText(string citation){
+void StyleFormatter::addInText(string citation){
 	inTextList.push_back(citation);
 }

@@ -7,6 +7,7 @@
  *	
  */
 
+#include <sstream>
 #include "IEEEFormatter.h"
 
 IEEEFormatter::IEEEFormatter(void){
@@ -41,11 +42,16 @@ OutputCitation * IEEEFormatter::format(ResourceData * data){
       cout << data->getType() << ": " <<"Style doesn't exist!" << "\n";
 			exit(1);
 	}
-	
+
 	// create an in-text citation and add it to the list
 	citeCount++;	
+
+  // convert citeCount to string
+  ostringstream convert;
+  convert << citeCount;
+
 	string inTextCite = "[";
-	inTextCite += itoa(citeCount);
+	inTextCite += convert.str();
 	inTextCite += "]";
 	addInText(inTextCite);
 	

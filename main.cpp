@@ -29,15 +29,17 @@ int main (int argc, char * const argv[]){
 
 	BibliographyParser bParser(bFileName, tFileName);
 
-  char * file_buffer = new char[sizeof(MAX_CHAR_FILE)];
-		
+  string file_string;
+
 	bParser.openFiles();
 	bParser.parseBibliographyItems();
-  bParser.parseInputFile(file_buffer);
+  bParser.parseInputFile(&file_string);
   
-//	BibliographyGenerator bgen(bParser.getCitationList(), 1);
-//  bgen.generate();
-//  bgen.printCitations("test.txt");
+	BibliographyGenerator bgen(bParser.getCitationList(), 2);
+  bgen.generate();
+
+  bgen.printInText(file_string);
+  bgen.printCitations("test.txt");
 	
 	return 0;
 }

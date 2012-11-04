@@ -102,20 +102,26 @@ void BibliographyGenerator::printInText(string fileString){
 	 *	It takes in the file's data and adds the citations to the appropriate locations
 	 *
 	*/
-	char * charchars = new char[sizeof(char) * 128000]; 
 	fstream outputFile;
-	outputFile.open(filename.c_str(), fstream::app | fstream::out);
-	list<string> insertList = formatter.getInTextList();
+	outputFile.open("test.txt", fstream::app | fstream::out);
+	list<string> insertList = formatter->getInTextList();
 	
 	int i = 0;
 	
-	sprintf(charchars, fileString.c_str());
-	while(!insertList.empty()){
-		sprintf(charchars, charchars, insertList.front());
-		insertList.pop_front();
-		index++;
+	while(i < fileString.length()){
+    if(insertList.empty()){
+      break;
+    }
+    if(fileString[i] == '~'){
+      fileString.erase(i, 1);
+      fileString.insert(i, insertList.front());
+      insertList.pop_front();
+    }
+
+    i++;
 	}
 	
-	outputFile.close(); 
+  outputFile << fileString;
 
+	outputFile.close(); 
 }
