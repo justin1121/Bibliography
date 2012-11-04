@@ -24,11 +24,12 @@
 #include "ConferenceData.h"
 #include "JournalData.h"
 #include "TechnicalReportData.h"
+#include "WebsiteData.h"
 
 const int MAX_SZ_KEY    = 10;
 const int MAX_SZ_LINE   = 128;
 const int MAX_NUM_REF   = 100;
-const int MAX_CHAR_FILE = 128000;
+const int MAX_LINE      = 1000;
 
 using namespace std;
 
@@ -42,6 +43,7 @@ private:
 	const char   * conferenceToken;	/*string token used to identify conference items e.g., @conference{ */
 	const char   * journalToken ;		/*string token used to identify journal items e.g., @journal{ */
 	const char   * techReportToken ;	/*string token used to identify book technical report e.g., @technicalreport{ */
+  const char   * websiteToken;
 	const char   * endOfItem ;			/*string token used to identify end of item  e.g., }  */
 	const char   * endOfFile ;			/*string token used to identify end of file  e.g., }; */
 	const char   * startOfInputToken;
@@ -54,10 +56,11 @@ private:
 	void setJournalData(JournalData *, string, string);
 	void setConferenceData(ConferenceData *, string, string);
 	void setTechnicalReportData(TechnicalReportData *, string, string);
+  void setWebsiteData(WebsiteData *, string, string);
   char * readInputFileLine();
-  char * getSubStringKey(int, char *, char *);
+  char * getSubStringKey(int, char *, string *);
   void addValidKey(char *, int);
-  void formatTextBody(char *, int, int);
+  void formatTextBody(string *,char *, int, int);
 public:
 	BibliographyParser(const char *, const char *); /*constructor*/
 	~BibliographyParser();						 /*destructor*/	
@@ -65,7 +68,7 @@ public:
 	void openFiles(void);
 	void closeFiles(void);
 	void parseBibliographyItems(void);				/*parse the bibliography file*/	
-	void parseInputFile(char *);
+	void parseInputFile(string *);
 	void printBibliography(void);					/*display bibliography file into standard output*/	
 
 	CitationList getCitationList(void);
