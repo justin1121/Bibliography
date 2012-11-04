@@ -37,8 +37,8 @@ void CitationList::addCitation(ResourceData * data){
  * Returns the last ResourceData object that was put into the list.
  ******************************************************************/
 ResourceData * CitationList::nextCitation(void){
-   ResourceData * temp = dataList.front();
-   dataList.pop_front();
+   ResourceData * temp = dataList.back();
+   dataList.pop_back();
 
    return temp;
 }
