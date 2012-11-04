@@ -21,6 +21,8 @@ private:
 	OutputCitation * formatJournal(JournalData * data);
 	OutputCitation * formatTechnicalReport(TechnicalReportData * data);
 	OutputCitation * formatWebsite(WebsiteData * data);
+	int citeCount;
+	
 public:
 	IEEEFormatter(void);
 	~IEEEFormatter(void);

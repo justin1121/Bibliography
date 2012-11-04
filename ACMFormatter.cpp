@@ -41,6 +41,16 @@ OutputCitation * ACMFormatter::format(ResourceData * data){
 			exit(1);
 	}
 	
+	// add an in-text citation to the list
+	string inTextCite = "";
+	inTextCite += "[";
+	inTextCite += data->getAuthor();
+	inTextCite += " ";
+	inTextCite += data->getDate();
+	inTextCite += "]";
+	addInText(inTextCite);
+
+	
 	return outCite;
 }
 

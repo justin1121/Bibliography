@@ -31,13 +31,13 @@ class BibliographyGenerator{
 	StyleFormatter 	* formatter;
 	OutputCitation 	* citation;
 	int 			citeCount;
-  int style;
+	int style;
 public:
 	BibliographyGenerator(CitationList list, int style);
 	~BibliographyGenerator(void);
 	void generate(void);
 	void printCitations(string);
-
+	void printInText(string);
 	
 };
 

@@ -12,7 +12,7 @@
 #include "StyleFormatter.h"
 
 using namespace std;
-StyleFormatter::StyleFormatter(){
+StyleFormatter::StyleFormatter(){ 
 }
 
 StyleFormatter::~StyleFormatter(){
@@ -42,4 +42,10 @@ OutputCitation * StyleFormatter::formatWebsite(WebsiteData * data){
 	return NULL;
 }
 
+list getInTextList(){
+	return N;
+}
 
+void addInText(string citation){
+	inTextList.push_back(citation);
+}

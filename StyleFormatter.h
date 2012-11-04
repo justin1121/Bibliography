@@ -28,17 +28,22 @@ class StyleFormatter{
  * 	desired style of references. 
 */
 private:
-	virtual OutputCitation * formatBook(BookData * data);
-	virtual OutputCitation * formatConference(ConferenceData * data);
-	virtual OutputCitation * formatJournal(JournalData * data);
-	virtual OutputCitation * formatTechnicalReport(TechnicalReportData * data);
-	virtual OutputCitation * formatWebsite(WebsiteData * data);
+	virtual OutputCitation * 	formatBook(BookData * data);
+	virtual OutputCitation * 	formatConference(ConferenceData * data);
+	virtual OutputCitation * 	formatJournal(JournalData * data);
+	virtual OutputCitation * 	formatTechnicalReport(TechnicalReportData * data);
+	virtual OutputCitation * 	formatWebsite(WebsiteData * data);	
+			
+protected:
+	list<string> 	inTextList; 
+	void 	addInText(string);
 
 public:
 	StyleFormatter(void);
 	~StyleFormatter(void);
 
 	OutputCitation * format(ResourceData * data);
+	list<string> 	getInTextList(void);
 
 };
 

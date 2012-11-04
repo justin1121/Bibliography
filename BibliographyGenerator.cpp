@@ -96,3 +96,26 @@ void BibliographyGenerator::printCitations(string filename){
 	
 	outputFile.close(); 
 }
+
+void BibliographyGenerator::printInText(string fileString){
+	/*	This function prints the in-text citations into the original file.
+	 *	It takes in the file's data and adds the citations to the appropriate locations
+	 *
+	*/
+	char * charchars = new char[sizeof(char) * 128000]; 
+	fstream outputFile;
+	outputFile.open(filename.c_str(), fstream::app | fstream::out);
+	list<string> insertList = formatter.getInTextList();
+	
+	int i = 0;
+	
+	sprintf(charchars, fileString.c_str());
+	while(!insertList.empty()){
+		sprintf(charchars, charchars, insertList.front());
+		insertList.pop_front();
+		index++;
+	}
+	
+	outputFile.close(); 
+
+}
